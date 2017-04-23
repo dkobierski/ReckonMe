@@ -5,17 +5,17 @@ using Xamarin.Forms;
 
 namespace ReckonMe.Views
 {
-    public partial class ItemDetailPage : ContentPage
+    public partial class WalletDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        WalletDetailViewModel viewModel;
 
         // Note - The Xamarin.Forms Previewer requires a default, parameterless constructor to render a page.
-        public ItemDetailPage()
+        public WalletDetailPage()
         {
             InitializeComponent();
         }
 
-        public ItemDetailPage(ItemDetailViewModel viewModel)
+        public WalletDetailPage(WalletDetailViewModel viewModel)
         {
             InitializeComponent();
 

@@ -11,7 +11,7 @@ namespace ReckonMe.ViewModels
         /// <summary>
         /// Get the azure service instance
         /// </summary>
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Wallet> DataStore => DependencyService.Get<IDataStore<Wallet>>();
 
         bool isBusy = false;
         public bool IsBusy

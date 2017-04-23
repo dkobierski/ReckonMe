@@ -10,12 +10,12 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(ReckonMe.Services.MockDataStore))]
 namespace ReckonMe.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Wallet>
     {
         bool isInitialized;
-        List<Item> items;
+        List<Wallet> items;
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Wallet item)
         {
             await InitializeAsync();
 
@@ -24,35 +24,35 @@ namespace ReckonMe.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Wallet item)
         {
             await InitializeAsync();
 
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var _item = items.Where((Wallet arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(_item);
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(Item item)
+        public async Task<bool> DeleteItemAsync(Wallet item)
         {
             await InitializeAsync();
 
-            var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var _item = items.Where((Wallet arg) => arg.Id == item.Id).FirstOrDefault();
             items.Remove(_item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Wallet> GetItemAsync(string id)
         {
             await InitializeAsync();
 
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Wallet>> GetItemsAsync(bool forceRefresh = false)
         {
             await InitializeAsync();
 
@@ -75,18 +75,18 @@ namespace ReckonMe.Services
             if (isInitialized)
                 return;
 
-            items = new List<Item>();
-            var _items = new List<Item>
+            items = new List<Wallet>();
+            var _items = new List<Wallet>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Buy some cat food", Description="The cats are hungry"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Learn F#", Description="Seems like a functional idea"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Learn to play guitar", Description="Noted"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Buy some new candles", Description="Pine and cranberry for that winter feel"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Complete holiday shopping", Description="Keep it a secret!"},
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Finish a todo list", Description="Done"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Buy some cat food", Description="The cats are hungry"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Learn F#", Description="Seems like a functional idea"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Learn to play guitar", Description="Noted"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Buy some new candles", Description="Pine and cranberry for that winter feel"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Complete holiday shopping", Description="Keep it a secret!"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Finish a todo list", Description="Done"},
             };
 
-            foreach (Item item in _items)
+            foreach (Wallet item in _items)
             {
                 items.Add(item);
             }

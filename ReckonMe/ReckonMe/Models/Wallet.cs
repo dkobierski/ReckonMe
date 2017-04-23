@@ -1,6 +1,6 @@
 ﻿namespace ReckonMe.Models
 {
-    public class Item : BaseDataObject
+    public class Wallet : BaseDataObject
     {
         string text = string.Empty;
         public string Text

@@ -2,13 +2,13 @@
 
 namespace ReckonMe.ViewModels
 {
-    public class ItemDetailViewModel : BaseViewModel
+    public class WalletDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Wallet Wallet { get; set; }
+        public WalletDetailViewModel(Wallet wallet = null)
         {
-            Title = item.Text;
-            Item = item;
+            Title = wallet.Text;
+            Wallet = wallet;
         }
 
         int quantity = 1;
