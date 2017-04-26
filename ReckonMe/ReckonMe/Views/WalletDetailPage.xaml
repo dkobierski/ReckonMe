@@ -3,8 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReckonMe.Views.WalletDetailPage"
              Title="{Binding Title}">
-	<StackLayout Spacing="20" Padding="15">
-		<Label Text="{Binding Wallet.Text}" FontSize="Medium"/>
-        <Label Text="{Binding Wallet.Description}" FontSize="Small"/>
-    </StackLayout>
+    <ContentPage.Content>
+        <ListView x:Name="EventsListView" Footer="Footer">
+            <ListView.Header>
+                <StackLayout Padding="10" BackgroundColor="{StaticResource DarkBackgroundColor}">
+                    <Label Text="Events List:" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.Footer>
+            <StackLayout Padding="5">
+                <Label Text="{Binding Wallet.Description}" FontSize="Small"/>
+            </StackLayout>
+            </ListView.Footer>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Spacing="20" Padding="15">
+                            <Label Text="{Binding Wallet.Text}" FontSize="Medium"/>
+                            <Label Text="{Binding Wallet.Description}" FontSize="Small"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
 </ContentPage>

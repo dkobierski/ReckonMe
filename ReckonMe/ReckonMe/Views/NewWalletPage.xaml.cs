@@ -16,8 +16,8 @@ namespace ReckonMe.Views
 
             Wallet = new Wallet
             {
-                Text = "Enter wallet name",
-                Description = "Enter description"
+                Text = "",
+                Description = ""
             };
 
             BindingContext = this;

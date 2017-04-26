@@ -78,12 +78,8 @@ namespace ReckonMe.Services
             items = new List<Wallet>();
             var _items = new List<Wallet>
             {
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Buy some cat food", Description="The cats are hungry"},
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Learn F#", Description="Seems like a functional idea"},
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Learn to play guitar", Description="Noted"},
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Buy some new candles", Description="Pine and cranberry for that winter feel"},
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Complete holiday shopping", Description="Keep it a secret!"},
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Finish a todo list", Description="Done"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Portfel rodzinny", Description="Budżet rodzinny"},
+                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Portfel mieszkaniowy", Description="Rozliczenia ze współlokatorami"},
             };
 
             foreach (Wallet item in _items)
