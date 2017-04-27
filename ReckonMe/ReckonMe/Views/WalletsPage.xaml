@@ -4,7 +4,7 @@
              x:Class="ReckonMe.Views.WalletsPage"
               Title="{Binding Title}"
              x:Name="BrowseItemsPage">
-  <ContentPage.ToolbarItems BackgroundColor="">
+  <ContentPage.ToolbarItems>
   	<ToolbarItem Text="Add wallet" Clicked="AddWallet_Clicked" />
   </ContentPage.ToolbarItems>
   <ContentPage.Content>

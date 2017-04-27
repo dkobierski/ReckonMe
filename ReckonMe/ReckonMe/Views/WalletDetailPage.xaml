@@ -3,11 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReckonMe.Views.WalletDetailPage"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add expense" Clicked="AddExpense_Clicked" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView x:Name="EventsListView" Footer="Footer">
+        <ListView x:Name="ExpensesListView"                  
+                  ItemsSource="{Binding Expenses}"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true"
+                  RefreshCommand="{Binding LoadExpensesCommand}"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  CachingStrategy="RecycleElement"
+				  ItemSelected="OnExpenseSelected">>
             <ListView.Header>
                 <StackLayout Padding="10" BackgroundColor="{StaticResource DarkBackgroundColor}">
-                    <Label Text="Events List:" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                    <Label Text="Expenses List:" FontSize="Medium" HorizontalTextAlignment="Center"/>
                 </StackLayout>
             </ListView.Header>
             <ListView.Footer>
@@ -18,9 +29,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Spacing="20" Padding="15">
-                            <Label Text="{Binding Wallet.Text}" FontSize="Medium"/>
-                            <Label Text="{Binding Wallet.Description}" FontSize="Small"/>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Text}" 
+                                   FontSize="16"
+                                   Style="{DynamicResource ListItemTextStyle}"
+                                   LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding Description}"
+                                   FontSize="13"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   LineBreakMode="NoWrap"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

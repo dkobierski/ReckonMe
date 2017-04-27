@@ -7,10 +7,10 @@ using ReckonMe.Models;
 
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(ReckonMe.Services.MockDataStore))]
+[assembly: Dependency(typeof(ReckonMe.Services.MockWalletsDataStore))]
 namespace ReckonMe.Services
 {
-    public class MockDataStore : IDataStore<Wallet>
+    public class MockWalletsDataStore : IDataStore<Wallet>
     {
         bool isInitialized;
         List<Wallet> items;

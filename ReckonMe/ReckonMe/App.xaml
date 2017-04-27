@@ -19,6 +19,9 @@
                 <Setter Property="BarBackgroundColor" Value="#404040" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
+            <Style TargetType="ListView">
+                <Setter Property="SeparatorColor" Value="#404040" />
+            </Style>
 
         </ResourceDictionary>
     </Application.Resources>
