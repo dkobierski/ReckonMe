@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ReckonMe.Models
+﻿namespace ReckonMe.Models
 {
     public class Expense : BaseDataObject
     {
-        string text = string.Empty;
+        private string _text = string.Empty;
         public string Text
         {
-            get { return text; }
-            set { SetProperty(ref text, value); }
+            get => _text;
+            set => SetProperty(ref _text, value);
         }
 
-        string description = string.Empty;
+        private string _description = string.Empty;
         public string Description
         {
-            get { return description; }
-            set { SetProperty(ref description, value); }
+            get => _description;
+            set => SetProperty(ref _description, value);
         }
     }
 }

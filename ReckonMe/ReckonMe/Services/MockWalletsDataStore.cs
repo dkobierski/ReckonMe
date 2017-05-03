@@ -12,14 +12,14 @@ namespace ReckonMe.Services
 {
     public class MockWalletsDataStore : IDataStore<Wallet>
     {
-        bool isInitialized;
-        List<Wallet> items;
+        private bool _isInitialized;
+        private List<Wallet> _items;
 
         public async Task<bool> AddItemAsync(Wallet item)
         {
             await InitializeAsync();
 
-            items.Add(item);
+            _items.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -28,9 +28,9 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            var _item = items.Where((Wallet arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
-            items.Add(item);
+            var _item = _items.FirstOrDefault(arg => arg.Id == item.Id);
+            _items.Remove(_item);
+            _items.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -39,8 +39,8 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            var _item = items.Where((Wallet arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
+            var _item = _items.FirstOrDefault(arg => arg.Id == item.Id);
+            _items.Remove(_item);
 
             return await Task.FromResult(true);
         }
@@ -49,14 +49,14 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(_items.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Wallet>> GetItemsAsync(bool forceRefresh = false)
         {
             await InitializeAsync();
 
-            return await Task.FromResult(items);
+            return await Task.FromResult(_items);
         }
 
         public Task<bool> PullLatestAsync()
@@ -72,22 +72,23 @@ namespace ReckonMe.Services
 
         public async Task InitializeAsync()
         {
-            if (isInitialized)
+            if (_isInitialized)
                 return;
 
-            items = new List<Wallet>();
-            var _items = new List<Wallet>
+            _items = new List<Wallet>();
+
+            var mockedItems = new List<Wallet>
             {
                 new Wallet { Id = Guid.NewGuid().ToString(), Text = "Portfel rodzinny", Description="Budżet rodzinny"},
                 new Wallet { Id = Guid.NewGuid().ToString(), Text = "Portfel mieszkaniowy", Description="Rozliczenia ze współlokatorami"},
             };
 
-            foreach (Wallet item in _items)
+            foreach (var item in mockedItems)
             {
-                items.Add(item);
+                _items.Add(item);
             }
 
-            isInitialized = true;
+            _isInitialized = true;
         }
     }
 }

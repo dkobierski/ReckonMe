@@ -10,27 +10,27 @@ namespace ReckonMe.ViewModels
 {
     public class WalletDetailViewModel : BaseViewModel
     {
-        
         public ObservableRangeCollection<Expense> Expenses { get; set; }
         public Command LoadExpensesCommand { get; set; }
         public Wallet Wallet { get; set; }
 
         public WalletDetailViewModel(Wallet wallet = null)
         {
-            Title = wallet.Text;
+            Title = wallet?.Text;
             Wallet = wallet;
             Expenses = new ObservableRangeCollection<Expense>();
             LoadExpensesCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
-        int quantity = 1;
+        int _quantity = 1;
+
         public int Quantity
         {
-            get { return quantity; }
-            set { SetProperty(ref quantity, value); }
+            get => _quantity;
+            set => SetProperty(ref _quantity, value);
         }
 
-        async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;

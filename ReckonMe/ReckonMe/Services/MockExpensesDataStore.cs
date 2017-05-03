@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,14 +10,14 @@ namespace ReckonMe.Services
 {
     class MockExpensesDataStore : IDataStore<Expense>
     {
-        bool isInitialized;
-        List<Expense> items;
+        private bool _isInitialized;
+        private List<Expense> _items;
 
         public async Task<bool> AddItemAsync(Expense item)
         {
             await InitializeAsync();
 
-            items.Add(item);
+            _items.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -27,9 +26,9 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            var _item = items.Where((Expense arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
-            items.Add(item);
+            var _item = _items.FirstOrDefault(arg => arg.Id == item.Id);
+            _items.Remove(_item);
+            _items.Add(item);
 
             return await Task.FromResult(true);
         }
@@ -38,8 +37,8 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            var _item = items.Where((Expense arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
+            var _item = _items.FirstOrDefault(arg => arg.Id == item.Id);
+            _items.Remove(_item);
 
             return await Task.FromResult(true);
         }
@@ -48,14 +47,14 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(_items.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Expense>> GetItemsAsync(bool forceRefresh = false)
         {
             await InitializeAsync();
 
-            return await Task.FromResult(items);
+            return await Task.FromResult(_items);
         }
 
         public Task<bool> PullLatestAsync()
@@ -71,21 +70,22 @@ namespace ReckonMe.Services
 
         public async Task InitializeAsync()
         {
-            if (isInitialized)
+            if (_isInitialized)
                 return;
 
-            items = new List<Expense>();
-            var _items = new List<Expense>
+            _items = new List<Expense>();
+
+            var mockedExpenses = new List<Expense>
             {
                 new Expense { Id = Guid.NewGuid().ToString(), Text = "Testowy wydatek", Description="Testowy opis"},
             };
 
-            foreach (Expense item in _items)
+            foreach (var item in mockedExpenses)
             {
-                items.Add(item);
+                _items.Add(item);
             }
 
-            isInitialized = true;
+            _isInitialized = true;
         }
     }
 }
