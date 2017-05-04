@@ -1,4 +1,5 @@
-﻿using ReckonMe.Views;
+﻿using ReckonMe.Services;
+using ReckonMe.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,23 +18,30 @@ namespace ReckonMe
 
         public static void SetMainPage()
         {
-            Current.MainPage = new TabbedPage
+            if (DependencyService.Get<IAccountService>().IsUserLoggedIn())
             {
-                Children =
+                Current.MainPage = new TabbedPage
                 {
-                    new NavigationPage(new WalletsPage())
+                    Children =
                     {
-                        Title = "Wallets",
-                        Icon = Device.OnPlatform("tab_feed.png",null,null)
+                        new NavigationPage(new WalletsPage())
+                        {
+                            Title = "Wallets",
+                            Icon = Device.OnPlatform("tab_feed.png",null,null)
 
-                    },
-                    new NavigationPage(new AboutPage())
-                    {
-                        Title = "About",
-                        Icon = Device.OnPlatform("tab_about.png",null,null)
-                    },
-                },          
-            };
+                        },
+                        new NavigationPage(new AboutPage())
+                        {
+                            Title = "About",
+                            Icon = Device.OnPlatform("tab_about.png",null,null)
+                        }
+                    }
+                };
+            }
+            else
+            {
+                Current.MainPage = new NavigationPage(new LoginPage());
+            }
         }
     }
 }
