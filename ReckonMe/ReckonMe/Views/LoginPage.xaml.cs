@@ -13,7 +13,7 @@ namespace ReckonMe.Views
 
         public LoginPage() : this(DependencyService.Get<IAccountService>())
         {
-            InitializeComponent();
+            
         }
 
         public LoginPage(IAccountService accountService)
@@ -24,7 +24,7 @@ namespace ReckonMe.Views
 
         private async void OnSignUpClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)
