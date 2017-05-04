@@ -10,26 +10,26 @@ using Xamarin.Forms;
 
 namespace ReckonMe.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class WalletsViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<Item> Items { get; set; }
-        public Command LoadItemsCommand { get; set; }
+        public ObservableRangeCollection<Wallet> Wallets { get; set; }
+        public Command LoadWalletsCommand { get; set; }
 
-        public ItemsViewModel()
+        public WalletsViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableRangeCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Title = "Wallets";          
+            Wallets = new ObservableRangeCollection<Wallet>();
+            LoadWalletsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewWalletPage, Wallet>(this, "AddItem", async (obj, wallet) =>
             {
-                var _item = item as Item;
-                Items.Add(_item);
-                await DataStore.AddItemAsync(_item);
+                var _wallet = wallet as Wallet;
+                Wallets.Add(_wallet);
+                await DataStore.AddItemAsync(_wallet);
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -38,9 +38,9 @@ namespace ReckonMe.ViewModels
 
             try
             {
-                Items.Clear();
+                Wallets.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                Items.ReplaceRange(items);
+                Wallets.ReplaceRange(items);
             }
             catch (Exception ex)
             {

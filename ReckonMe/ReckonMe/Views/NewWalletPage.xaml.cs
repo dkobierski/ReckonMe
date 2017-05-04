@@ -6,18 +6,18 @@ using Xamarin.Forms;
 
 namespace ReckonMe.Views
 {
-    public partial class NewItemPage : ContentPage
+    public partial class NewWalletPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Wallet Wallet { get; set; }
 
-        public NewItemPage()
+        public NewWalletPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Wallet = new Wallet
             {
-                Text = "Item name",
-                Description = "This is a nice description"
+                Text = "",
+                Description = ""
             };
 
             BindingContext = this;
@@ -25,7 +25,7 @@ namespace ReckonMe.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", Wallet);
             await Navigation.PopToRootAsync();
         }
     }

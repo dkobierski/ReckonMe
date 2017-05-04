@@ -42,25 +42,27 @@
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
     <Compile Include="Models\BaseDataObject.cs" />
-    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IDataStore.cs" />
-    <Compile Include="Services\MockDataStore.cs" />
+    <Compile Include="Services\MockWalletsDataStore.cs" />
+    <Compile Include="Services\MockExpensesDataStore.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ItemDetailViewModel.cs" />
-    <Compile Include="ViewModels\ItemsViewModel.cs" />
+    <Compile Include="ViewModels\WalletDetailViewModel.cs" />
+    <Compile Include="ViewModels\WalletsViewModel.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemDetailPage.xaml.cs">
-      <DependentUpon>ItemDetailPage.xaml</DependentUpon>
+    <Compile Include="Views\WalletDetailPage.xaml.cs">
+      <DependentUpon>WalletDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemsPage.xaml.cs">
-      <DependentUpon>ItemsPage.xaml</DependentUpon>
+    <Compile Include="Views\WalletsPage.xaml.cs">
+      <DependentUpon>WalletsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewItemPage.xaml.cs">
-      <DependentUpon>NewItemPage.xaml</DependentUpon>
+    <Compile Include="Views\NewWalletPage.xaml.cs">
+      <DependentUpon>NewWalletPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -72,15 +74,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ItemDetailPage.xaml">
+    <EmbeddedResource Include="Views\WalletDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ItemsPage.xaml">
+    <EmbeddedResource Include="Views\WalletsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\NewItemPage.xaml">
+    <EmbeddedResource Include="Views\NewWalletPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

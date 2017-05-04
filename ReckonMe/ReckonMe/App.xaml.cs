@@ -21,17 +21,18 @@ namespace ReckonMe
             {
                 Children =
                 {
-                    new NavigationPage(new ItemsPage())
+                    new NavigationPage(new WalletsPage())
                     {
-                        Title = "Browse",
+                        Title = "Wallets",
                         Icon = Device.OnPlatform("tab_feed.png",null,null)
+
                     },
                     new NavigationPage(new AboutPage())
                     {
                         Title = "About",
                         Icon = Device.OnPlatform("tab_about.png",null,null)
                     },
-                }
+                },          
             };
         }
     }
