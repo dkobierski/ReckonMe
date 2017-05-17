@@ -1,4 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using ReckonMe.Models;
 using Xamarin.Forms;
 
@@ -8,7 +14,7 @@ namespace ReckonMe.Services
 {
     public class AccountService : IAccountService
     {
-        private IRestApiClient _api;
+        private readonly IRestApiClient _api;
 
         public AccountService() : this(DependencyService.Get<IRestApiClient>())
         {
@@ -24,13 +30,34 @@ namespace ReckonMe.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> LoginUserAsync(ApplicationUser user)
+        public async Task<bool> LoginUserAsync(ApplicationUser user)
         {
-            
-            var x = new Task<bool>(() => true);
-            x.Start();
+            try
+            {
+                var response = await _api.Client.PostAsync($"{_api.Client.BaseAddress}account/login", new StringContent(
+                    JsonConvert.SerializeObject(user),
+                    Encoding.UTF8,
+                    "application/json")).ConfigureAwait(false);
 
-            return x;
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var token = new StreamReader(await response.Content.ReadAsStreamAsync()).ReadToEnd();
+
+                    _api.SetAuthToken(token);
+
+                }
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    return false;
+                
+
+            }
+            catch (HttpRequestException e)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool IsUserLoggedIn()

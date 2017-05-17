@@ -13,14 +13,13 @@ namespace ReckonMe.Services
         {
             Client = new HttpClient();
 
-            //Client.BaseAddress = new Uri("");
+            Client.BaseAddress = new Uri("http://10.0.2.2:5000/api/");
         }
 
         public HttpClient Client { get; }
 
         public void SetAuthToken(string token)
         {
-
             Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", token);
         }
     }
