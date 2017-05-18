@@ -1,6 +1,7 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using ReckonMe.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ReckonMe.Helpers.RequestExecutor))]
@@ -15,25 +16,32 @@ namespace ReckonMe.Helpers
 
     public class RequestExecutor : IRequstExecutor
     {
-        private readonly IRestApiClient _api;
+        private readonly HttpClient _client;
 
-        public RequestExecutor() : this(DependencyService.Get<IRestApiClient>())
+        public RequestExecutor()
         {
-        }
-
-        public RequestExecutor(IRestApiClient api)
-        {
-            _api = api;
-        }
-
-        public Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content)
-        {
-            return _api.Client.PostAsync($"{_api.Client.BaseAddress}{relativeUrl}", content);
+            _client = new HttpClient
+            {
+                //                BaseAddress = new Uri("http://192.168.1.102:5001/api/"),
+                BaseAddress = new Uri("http://reckonmeapi.azurewebsites.net/api/"),
+                DefaultRequestHeaders =
+                {
+                    Accept =
+                    {
+                        new MediaTypeWithQualityHeaderValue("application/json")
+                    }
+                }
+            };
         }
 
         public void SetAuthToken(string token)
         {
-            _api.SetAuthToken(token);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+
+        public Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content)
+        {
+            return _client.PostAsync($"{_client.BaseAddress}{relativeUrl}", content);
         }
     }
 }

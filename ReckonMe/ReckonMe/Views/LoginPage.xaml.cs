@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ReckonMe.Models;
 using ReckonMe.Models.Account;
 using ReckonMe.Services;
@@ -25,7 +26,8 @@ namespace ReckonMe.Views
 
         private async void OnSignUpClicked(object sender, EventArgs e)
         {
-            
+            Navigation.InsertPageBefore(new SingUpPage(), Navigation.NavigationStack.First());
+            await Navigation.PopToRootAsync();
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)

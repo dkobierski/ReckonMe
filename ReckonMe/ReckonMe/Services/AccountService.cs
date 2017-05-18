@@ -50,6 +50,7 @@ namespace ReckonMe.Services
             {
                 return AccountRegisterResult.RequestException;
             }
+            return AccountRegisterResult.RequestException;
         }
 
         public async Task<AccountLoginResult> LoginUserAsync(AccountLoginData user)

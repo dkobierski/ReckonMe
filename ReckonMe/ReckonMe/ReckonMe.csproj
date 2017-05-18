@@ -52,11 +52,9 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IDataStore.cs" />
-    <Compile Include="Services\IRestApiClient.cs" />
     <Compile Include="Services\MockWalletsDataStore.cs" />
     <Compile Include="Services\MockExpensesDataStore.cs" />
     <Compile Include="Helpers\RequestExecutor.cs" />
-    <Compile Include="Services\RestApiClient.cs" />
     <Compile Include="Helpers\TokenDecoder.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -67,9 +65,9 @@
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
-	</Compile>
-    <Compile Include="Views\LoginPage - Copy.xaml.cs">
-      <DependentUpon>LoginPage - Copy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SingUpPage.xaml.cs">
+      <DependentUpon>SingUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WalletDetailPage.xaml.cs">
       <DependentUpon>WalletDetailPage.xaml</DependentUpon>
@@ -127,7 +125,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\LoginPage - Copy.xaml">
+    <EmbeddedResource Include="Views\SingUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

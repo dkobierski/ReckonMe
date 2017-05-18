@@ -15,7 +15,6 @@ namespace ReckonMe.Test.Services
     [TestFixture]
     public class AccountServiceTests
     {
-        public static readonly IRestApiClient ApiClient = Substitute.For<IRestApiClient>();
         public static readonly IDecodeToken TokenDecoder = Substitute.For<IDecodeToken>();
         public static readonly IRequstExecutor RequstExecutor = Substitute.For<IRequstExecutor>();
 
@@ -92,7 +91,7 @@ namespace ReckonMe.Test.Services
 
                 var result = await _accountService.LoginUserAsync(new AccountLoginData());
 
-                ApiClient.Received().SetAuthToken(expectedToken);
+                RequstExecutor.Received().SetAuthToken(expectedToken);
             }
         }
 
