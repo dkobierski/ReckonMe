@@ -18,28 +18,22 @@ namespace ReckonMe.Test.Services
         public static readonly IDecodeToken TokenDecoder = Substitute.For<IDecodeToken>();
         public static readonly IRequstExecutor RequstExecutor = Substitute.For<IRequstExecutor>();
 
-        public static void MockResposneStatusCodeForApiClient(HttpStatusCode statusCode, string token = null)
+        public static void MockResponseStatusCodeForApiClient(HttpStatusCode statusCode, string token = null)
         {
-            var message = new Func<HttpResponseMessage>(() => new HttpResponseMessage(statusCode));
-
             if (!string.IsNullOrWhiteSpace(token))
             {
-                var task = new Task<Token>(() => new Token
+                var tokenObject = new Token
                 {
                     AccessToken = token,
                     ExpiresIn = 10
-                });
-
-                task.Start();
-                task.Wait();
+                };
 
                 TokenDecoder.Decode(Arg.Any<HttpResponseMessage>())
-                    .Returns(task);
+                    .Returns(tokenObject);
             }
 
-
             RequstExecutor.PostAsync(Arg.Any<string>(), Arg.Any<StringContent>())
-                .Returns(new Task<HttpResponseMessage>(message));
+                .Returns(new HttpResponseMessage(statusCode));
         }
 
         public class Login
@@ -52,9 +46,9 @@ namespace ReckonMe.Test.Services
             }
 
             [Test]
-            public async Task Authenticated_when_api_resposne_is_ok()
+            public async Task Authenticated_when_api_response_is_ok()
             {
-                MockResposneStatusCodeForApiClient(HttpStatusCode.OK);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.OK);
 
                 var result = await _accountService.LoginUserAsync(new AccountLoginData());
 
@@ -62,9 +56,9 @@ namespace ReckonMe.Test.Services
             }
 
             [Test]
-            public async Task RequestException_when_api_resposne_is_BadRequest()
+            public async Task RequestException_when_api_response_is_BadRequest()
             {
-                MockResposneStatusCodeForApiClient(HttpStatusCode.BadRequest);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.BadRequest);
 
                 var result = await _accountService.LoginUserAsync(new AccountLoginData());
 
@@ -73,9 +67,9 @@ namespace ReckonMe.Test.Services
 
 
             [Test]
-            public async Task InvalidCredential_when_api_resposne_is_Unauthorized()
+            public async Task InvalidCredential_when_api_response_is_Unauthorized()
             {
-                MockResposneStatusCodeForApiClient(HttpStatusCode.Unauthorized);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.Unauthorized);
 
                 var result = await _accountService.LoginUserAsync(new AccountLoginData());
 
@@ -83,11 +77,11 @@ namespace ReckonMe.Test.Services
             }
 
             [Test]
-            public async void Sets_token_when_api_resposne_is_ok()
+            public async Task Sets_token_when_api_response_is_ok()
             {
                 var expectedToken = "token";
 
-                MockResposneStatusCodeForApiClient(HttpStatusCode.OK, expectedToken);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.OK, expectedToken);
 
                 var result = await _accountService.LoginUserAsync(new AccountLoginData());
 
@@ -105,9 +99,9 @@ namespace ReckonMe.Test.Services
             }
 
             [Test]
-            public async Task AccountCreated_when_api_resposne_is_ok()
+            public async Task AccountCreated_when_api_response_is_ok()
             {
-                MockResposneStatusCodeForApiClient(HttpStatusCode.OK);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.OK);
 
                 var result = await _accountService.SignUpUserAsync(new AccountRegisterData());
 
@@ -115,9 +109,9 @@ namespace ReckonMe.Test.Services
             }
 
             [Test]
-            public async Task RequestException_when_api_resposne_is_BadRequest()
+            public async Task RequestException_when_api_response_is_BadRequest()
             {
-                MockResposneStatusCodeForApiClient(HttpStatusCode.BadRequest);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.BadRequest);
 
                 var result = await _accountService.SignUpUserAsync(new AccountRegisterData());
 
@@ -126,9 +120,9 @@ namespace ReckonMe.Test.Services
 
 
             [Test]
-            public async Task AlreadyExist_when_api_resposne_is_Conflict()
+            public async Task AlreadyExist_when_api_response_is_Conflict()
             {
-                MockResposneStatusCodeForApiClient(HttpStatusCode.Conflict);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.Conflict);
 
                 var result = await _accountService.SignUpUserAsync(new AccountRegisterData());
 

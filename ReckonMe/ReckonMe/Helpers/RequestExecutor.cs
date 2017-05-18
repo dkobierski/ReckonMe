@@ -39,9 +39,9 @@ namespace ReckonMe.Helpers
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
-        public Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content)
+        public async Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content)
         {
-            return _client.PostAsync($"{_client.BaseAddress}{relativeUrl}", content);
+            return await _client.PostAsync($"{_client.BaseAddress}{relativeUrl}", content);
         }
     }
 }
