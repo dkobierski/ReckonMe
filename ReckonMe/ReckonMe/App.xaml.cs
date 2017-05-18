@@ -40,7 +40,7 @@ namespace ReckonMe
             }
             else
             {
-                Current.MainPage = new NavigationPage(new LoginPage());
+                Current.MainPage = new NavigationPage(new SingUp());
             }
         }
     }

@@ -13,7 +13,8 @@ namespace ReckonMe.Services
         {
             Client = new HttpClient
             {
-                BaseAddress = new Uri("http://192.168.1.102:5001/api/"),
+//                BaseAddress = new Uri("http://192.168.1.102:5001/api/"),
+                BaseAddress = new Uri("http://reckonmeapi.azurewebsites.net/api/"),
                 DefaultRequestHeaders =
                 {
                     Accept =

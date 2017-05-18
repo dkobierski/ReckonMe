@@ -26,7 +26,7 @@ namespace ReckonMe.Services
             _tokenDecoder = tokenDecoder;
         }
 
-        public async Task<bool> SignUpUserAsync(AccountRegisterData user)
+        public async Task<AccountRegisterResult> SignUpUserAsync(AccountRegisterData user)
         {
             try
             {
@@ -40,20 +40,16 @@ namespace ReckonMe.Services
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    return true;
+                    return AccountRegisterResult.AccountCreated;
                 }
 
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    return false;
-
-
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                    return AccountRegisterResult.AlreadyExist;
             }
             catch (HttpRequestException e)
             {
-                return false;
+                return AccountRegisterResult.RequestException;
             }
-
-            return false;
         }
 
         public async Task<AccountLoginResult> LoginUserAsync(AccountLoginData user)

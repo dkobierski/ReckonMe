@@ -5,7 +5,7 @@ namespace ReckonMe.Services
 {
     public interface IAccountService
     {
-        Task<bool> SignUpUserAsync(AccountRegisterData user);
+        Task<AccountRegisterResult> SignUpUserAsync(AccountRegisterData user);
 
         Task<AccountLoginResult> LoginUserAsync(AccountLoginData user);
 
