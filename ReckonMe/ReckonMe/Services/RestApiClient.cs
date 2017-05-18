@@ -11,16 +11,25 @@ namespace ReckonMe.Services
     {
         public RestApiClient()
         {
-            Client = new HttpClient();
-
-            Client.BaseAddress = new Uri("http://10.0.2.2:5000/api/");
+            Client = new HttpClient
+            {
+                BaseAddress = new Uri("http://192.168.1.102:5001/api/"),
+                DefaultRequestHeaders =
+                {
+                    Accept =
+                    {
+                        new MediaTypeWithQualityHeaderValue("application/json")
+                    }
+                }
+            };
+            
         }
 
         public HttpClient Client { get; }
 
         public void SetAuthToken(string token)
         {
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", token);
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using ReckonMe.Models;
+using ReckonMe.Models.Account;
 using ReckonMe.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,7 +30,7 @@ namespace ReckonMe.Views
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            var user = new ApplicationUser()
+            var user = new AccountLoginData()
             {
                 Username = usernameEntry.Text,
                 Password = passwordEntry.Text
@@ -37,32 +38,37 @@ namespace ReckonMe.Views
 
             var result = await _accountService.LoginUserAsync(user);
 
-            if (result)
+            switch (result)
             {
-                var page = new TabbedPage
-                {
-                    Children =
+                case AccountLoginResult.Authenticated:
+                    var page = new TabbedPage
                     {
-                        new NavigationPage(new WalletsPage())
+                        Children =
                         {
-                            Title = "Wallets",
-                            Icon = Device.OnPlatform("tab_feed.png",null,null)
-
-                        },
-                        new NavigationPage(new AboutPage())
-                        {
-                            Title = "About",
-                            Icon = Device.OnPlatform("tab_about.png",null,null)
+                            new NavigationPage(new WalletsPage())
+                            {
+                                Title = "Wallets",
+                                Icon = Device.OnPlatform("tab_feed.png", null, null)
+                            },
+                            new NavigationPage(new AboutPage())
+                            {
+                                Title = "About",
+                                Icon = Device.OnPlatform("tab_about.png", null, null)
+                            }
                         }
-                    }
-                };
-                
-                Navigation.InsertPageBefore(page, this);
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                messageLabel.Text = "Login failed";
+                    };
+
+                    Navigation.InsertPageBefore(page, this);
+                    await Navigation.PopAsync();
+                    break;
+                case AccountLoginResult.InvalidCredentials:
+                    messageLabel.Text = "Invalid Credentials";
+                    break;
+                case AccountLoginResult.RequestException:
+                    messageLabel.Text = "Request failed";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using ReckonMe.Models;
+using ReckonMe.Helpers;
+using ReckonMe.Models.Account;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ReckonMe.Services.AccountService))]
@@ -14,42 +13,39 @@ namespace ReckonMe.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IRestApiClient _api;
+        private readonly IRequstExecutor _api;
+        private readonly IDecodeToken _tokenDecoder;
 
-        public AccountService() : this(DependencyService.Get<IRestApiClient>())
+        public AccountService() : this(DependencyService.Get<IRequstExecutor>(), new TokenDecoder())
         {
         }
 
-        public AccountService(IRestApiClient api)
+        public AccountService(IRequstExecutor api, IDecodeToken tokenDecoder)
         {
             _api = api;
+            _tokenDecoder = tokenDecoder;
         }
 
-        public Task<bool> SignUpUserAsync(ApplicationUser user)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<bool> LoginUserAsync(ApplicationUser user)
+        public async Task<bool> SignUpUserAsync(AccountRegisterData user)
         {
             try
             {
-                var response = await _api.Client.PostAsync($"{_api.Client.BaseAddress}account/login", new StringContent(
+                var content = new StringContent(
                     JsonConvert.SerializeObject(user),
                     Encoding.UTF8,
-                    "application/json")).ConfigureAwait(false);
+                    "application/json");
+
+                var response = await _api.PostAsync("account/register", content)
+                    .ConfigureAwait(false);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    var token = new StreamReader(await response.Content.ReadAsStreamAsync()).ReadToEnd();
-
-                    _api.SetAuthToken(token);
-
+                    return true;
                 }
 
                 if (response.StatusCode == HttpStatusCode.Unauthorized)
                     return false;
-                
+
 
             }
             catch (HttpRequestException e)
@@ -57,7 +53,36 @@ namespace ReckonMe.Services
                 return false;
             }
 
-            return true;
+            return false;
+        }
+
+        public async Task<AccountLoginResult> LoginUserAsync(AccountLoginData user)
+        {
+            try
+            {
+                var content = new StringContent(
+                    JsonConvert.SerializeObject(user),
+                    Encoding.UTF8,
+                    "application/json");
+
+                var response = await _api.PostAsync("account/login", content)
+                    .ConfigureAwait(false);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var token = await _tokenDecoder.Decode(response);
+                    
+                    _api.SetAuthToken(token.AccessToken);
+
+                    return AccountLoginResult.Authenticated;
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                return AccountLoginResult.RequestException;
+            }
+
+            return AccountLoginResult.InvalidCredentials;
         }
 
         public bool IsUserLoggedIn()
@@ -65,4 +90,6 @@ namespace ReckonMe.Services
             return false;
         }
     }
+
+    
 }

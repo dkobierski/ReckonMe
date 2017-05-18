@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
-using ReckonMe.Models;
+using ReckonMe.Models.Account;
 
 namespace ReckonMe.Services
 {
     public interface IAccountService
     {
-        Task<bool> SignUpUserAsync(ApplicationUser user);
+        Task<bool> SignUpUserAsync(AccountRegisterData user);
 
-        Task<bool> LoginUserAsync(ApplicationUser user);
+        Task<AccountLoginResult> LoginUserAsync(AccountLoginData user);
 
         bool IsUserLoggedIn();
     }
