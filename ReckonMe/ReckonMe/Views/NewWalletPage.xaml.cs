@@ -23,7 +23,7 @@ namespace ReckonMe.Views
             BindingContext = this;
         }
 
-        async void Save_Clicked(object sender, EventArgs e)
+        private async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "AddItem", Wallet);
             await Navigation.PopToRootAsync();

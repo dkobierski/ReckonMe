@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ReckonMe.Constants;
 using ReckonMe.Models;
 using ReckonMe.Models.Account;
 using ReckonMe.Services;
@@ -26,16 +27,15 @@ namespace ReckonMe.Views
 
         private async void OnSignUpClicked(object sender, EventArgs e)
         {
-            Navigation.InsertPageBefore(new SingUpPage(), Navigation.NavigationStack.First());
-            await Navigation.PopToRootAsync();
+            await Navigation.PushAsync(new SingUpPage());
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            var user = new AccountLoginData()
+            var user = new AccountLoginData
             {
-                Username = usernameEntry.Text,
-                Password = passwordEntry.Text
+                Username = UsernameEntry.Text,
+                Password = PasswordEntry.Text
             };
 
             var result = await _accountService.LoginUserAsync(user);
@@ -49,13 +49,11 @@ namespace ReckonMe.Views
                         {
                             new NavigationPage(new WalletsPage())
                             {
-                                Title = "Wallets",
-                                Icon = Device.OnPlatform("tab_feed.png", null, null)
+                                Title = "Wallets"
                             },
                             new NavigationPage(new AboutPage())
                             {
-                                Title = "About",
-                                Icon = Device.OnPlatform("tab_about.png", null, null)
+                                Title = "About"
                             }
                         }
                     };
@@ -64,10 +62,10 @@ namespace ReckonMe.Views
                     await Navigation.PopAsync();
                     break;
                 case AccountLoginResult.InvalidCredentials:
-                    messageLabel.Text = "Invalid Credentials";
+                    MessageLabel.Text = AccountResponses.InvalidCredentials;
                     break;
                 case AccountLoginResult.RequestException:
-                    messageLabel.Text = "Request failed";
+                    MessageLabel.Text = AccountResponses.ConnectionProblem;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

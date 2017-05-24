@@ -26,21 +26,18 @@ namespace ReckonMe
                     {
                         new NavigationPage(new WalletsPage())
                         {
-                            Title = "Wallets",
-                            Icon = Device.OnPlatform("tab_feed.png",null,null)
-
+                            Title = "Wallets"
                         },
                         new NavigationPage(new AboutPage())
                         {
-                            Title = "About",
-                            Icon = Device.OnPlatform("tab_about.png",null,null)
+                            Title = "About"
                         }
                     }
                 };
             }
             else
             {
-                Current.MainPage = new NavigationPage(new SingUpPage());
+                Current.MainPage = new NavigationPage(new LoginPage());
             }
         }
     }

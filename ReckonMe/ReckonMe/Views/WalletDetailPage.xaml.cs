@@ -8,7 +8,7 @@ namespace ReckonMe.Views
 {
     public partial class WalletDetailPage : ContentPage
     {
-        WalletDetailViewModel viewModel;
+        private readonly WalletDetailViewModel _viewModel;
 
         // Note - The Xamarin.Forms Previewer requires a default, parameterless constructor to render a page.
         public WalletDetailPage()
@@ -20,10 +20,10 @@ namespace ReckonMe.Views
         {
             InitializeComponent();
 
-            BindingContext = this.viewModel = viewModel;
+            BindingContext = _viewModel = viewModel;
         }
 
-        async void OnExpenseSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnExpenseSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var expense = args.SelectedItem as Expense;
             if (expense == null)
@@ -35,7 +35,7 @@ namespace ReckonMe.Views
             ExpensesListView.SelectedItem = null;
         }
 
-        async void AddExpense_Clicked(object sender, System.EventArgs e)
+        private async void AddExpense_Clicked(object sender, System.EventArgs e)
         {
             await DisplayAlert("Not implemented", ":)", "cancel");
         }
@@ -44,8 +44,8 @@ namespace ReckonMe.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Expenses.Count == 0)
-                viewModel.LoadExpensesCommand.Execute(null);
+            if (_viewModel.Expenses.Count == 0)
+                _viewModel.LoadExpensesCommand.Execute(null);
         }
     }
 }

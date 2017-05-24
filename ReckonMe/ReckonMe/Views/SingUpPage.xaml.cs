@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReckonMe.Constants;
 using ReckonMe.Models.Account;
 using ReckonMe.Services;
 using Xamarin.Forms;
@@ -26,9 +27,9 @@ namespace ReckonMe.Views
             InitializeComponent();
         }
 
-        async void OnSignUpClicked(object sender, EventArgs e)
+        private async void OnSignUpClicked(object sender, EventArgs e)
         {
-            var user = new AccountRegisterData()
+            var user = new AccountRegisterData
             {
                 Username = UsernameEntry.Text,
                 Password = PasswordEntry.Text,
@@ -44,10 +45,10 @@ namespace ReckonMe.Views
                     await Navigation.PopToRootAsync();
                     break;
                 case AccountRegisterResult.AlreadyExist:
-                    MessageLabel.Text = "Sign up failed";
+                    MessageLabel.Text = AccountResponses.UserAlreadyExists;
                     break;
                 case AccountRegisterResult.RequestException:
-                    MessageLabel.Text = "Sign up failed";
+                    MessageLabel.Text = AccountResponses.ConnectionProblem;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
