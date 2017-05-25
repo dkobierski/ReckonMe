@@ -7,13 +7,13 @@ using Xamarin.Forms;
 
 namespace ReckonMe.ViewModels
 {
-    public class WalletDetailViewModel : BaseViewModel
+    public class ExpensesViewModel : BaseViewModel
     {
         public ObservableRangeCollection<Expense> Expenses { get; set; }
         public Command LoadExpensesCommand { get; set; }
         public Wallet Wallet { get; set; }
 
-        public WalletDetailViewModel(Wallet wallet = null)
+        public ExpensesViewModel(Wallet wallet = null)
         {
             Title = wallet?.Text;
             Wallet = wallet;

@@ -12,6 +12,7 @@ namespace ReckonMe.ViewModels
         /// </summary>
         public IDataStore<Wallet> DataStore => DependencyService.Get<IDataStore<Wallet>>();
         public IDataStore<Expense> ExpenseDataStore => DependencyService.Get<IDataStore<Expense>>();
+        public IDataStore<Member> MemberDataStore => DependencyService.Get<IDataStore<Member>>();
 
         private bool _isBusy;
         public bool IsBusy

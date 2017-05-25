@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ReckonMe.Views.WalletDetailPage"
+             x:Class="ReckonMe.Views.ExpensesPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add expense" Clicked="AddExpense_Clicked" />
@@ -17,8 +17,8 @@
                   CachingStrategy="RecycleElement"
 				  ItemSelected="OnExpenseSelected">>
             <ListView.Header>
-                <StackLayout Padding="10" BackgroundColor="{StaticResource DarkBackgroundColor}">
-                    <Label Text="Expenses List:" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                <StackLayout Padding="10" BackgroundColor="{StaticResource LightBackgroundColor}">
+                    <Label Text="Expenses" FontSize="Medium" HorizontalTextAlignment="Center"/>
                 </StackLayout>
             </ListView.Header>
             <ListView.Footer>

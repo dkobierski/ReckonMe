@@ -46,6 +46,7 @@
     <Compile Include="Models\Account\AccountRegisterData.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\BaseDataObject.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Security\Token.cs" />
     <Compile Include="Models\Wallet.cs" />
@@ -53,16 +54,17 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IDataStore.cs" />
+    <Compile Include="Services\MockMembersDataStore.cs" />
     <Compile Include="Services\MockWalletsDataStore.cs" />
     <Compile Include="Services\MockExpensesDataStore.cs" />
     <Compile Include="Helpers\RequestExecutor.cs" />
     <Compile Include="Helpers\TokenDecoder.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\WalletDetailViewModel.cs" />
+    <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\ExpensesViewModel.cs" />
     <Compile Include="ViewModels\WalletsViewModel.cs" />
-    <Compile Include="Views\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
+    <Compile Include="Views\ExpenseDetailedPage.xaml.cs">
+      <DependentUpon>ExpenseDetailedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -70,8 +72,8 @@
     <Compile Include="Views\SingUpPage.xaml.cs">
       <DependentUpon>SingUpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WalletDetailPage.xaml.cs">
-      <DependentUpon>WalletDetailPage.xaml</DependentUpon>
+    <Compile Include="Views\ExpensesPage.xaml.cs">
+      <DependentUpon>ExpensesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WalletsPage.xaml.cs">
       <DependentUpon>WalletsPage.xaml</DependentUpon>
@@ -85,11 +87,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AboutPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\WalletDetailPage.xaml">
+    <EmbeddedResource Include="Views\ExpensesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -128,6 +126,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\SingUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ExpenseDetailedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

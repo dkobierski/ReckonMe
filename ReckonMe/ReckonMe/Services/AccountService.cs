@@ -38,19 +38,20 @@ namespace ReckonMe.Services
                 var response = await _api.PostAsync("account/register", content)
                     .ConfigureAwait(false);
 
-                if (response.StatusCode == HttpStatusCode.OK)
+                switch (response.StatusCode)
                 {
-                    return AccountRegisterResult.AccountCreated;
+                    case HttpStatusCode.OK:
+                        return AccountRegisterResult.AccountCreated;
+                    case HttpStatusCode.Conflict:
+                        return AccountRegisterResult.AlreadyExist;
+                    default:
+                        return AccountRegisterResult.RequestException;
                 }
-
-                if (response.StatusCode == HttpStatusCode.Conflict)
-                    return AccountRegisterResult.AlreadyExist;
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 return AccountRegisterResult.RequestException;
             }
-            return AccountRegisterResult.RequestException;
         }
 
         public async Task<AccountLoginResult> LoginUserAsync(AccountLoginData user)
@@ -74,7 +75,7 @@ namespace ReckonMe.Services
                     return AccountLoginResult.Authenticated;
                 }
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 return AccountLoginResult.RequestException;
             }
@@ -87,6 +88,4 @@ namespace ReckonMe.Services
             return false;
         }
     }
-
-    
 }

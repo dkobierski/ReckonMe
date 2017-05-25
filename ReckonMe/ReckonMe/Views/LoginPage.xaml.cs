@@ -43,22 +43,7 @@ namespace ReckonMe.Views
             switch (result)
             {
                 case AccountLoginResult.Authenticated:
-                    var page = new TabbedPage
-                    {
-                        Children =
-                        {
-                            new NavigationPage(new WalletsPage())
-                            {
-                                Title = "Wallets"
-                            },
-                            new NavigationPage(new AboutPage())
-                            {
-                                Title = "About"
-                            }
-                        }
-                    };
-
-                    Navigation.InsertPageBefore(page, this);
+                    Navigation.InsertPageBefore(new WalletsPage(), this);
                     await Navigation.PopAsync();
                     break;
                 case AccountLoginResult.InvalidCredentials:

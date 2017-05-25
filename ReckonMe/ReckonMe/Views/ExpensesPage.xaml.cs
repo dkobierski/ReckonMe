@@ -6,17 +6,17 @@ using Xamarin.Forms;
 
 namespace ReckonMe.Views
 {
-    public partial class WalletDetailPage : ContentPage
+    public partial class ExpensesPage : ContentPage
     {
-        private readonly WalletDetailViewModel _viewModel;
+        private readonly ExpensesViewModel _viewModel;
 
         // Note - The Xamarin.Forms Previewer requires a default, parameterless constructor to render a page.
-        public WalletDetailPage()
+        public ExpensesPage()
         {
             InitializeComponent();
         }
 
-        public WalletDetailPage(WalletDetailViewModel viewModel)
+        public ExpensesPage(ExpensesViewModel viewModel)
         {
             InitializeComponent();
 
@@ -29,8 +29,7 @@ namespace ReckonMe.Views
             if (expense == null)
                 return;
 
-            //await Navigation.PushAsync(new WalletDetailPage(new WalletDetailViewModel(wallet)));
-            await DisplayAlert(expense.Text, expense.Description, "cancel");
+            await Navigation.PushAsync(new ExpenseDetailedPage(new ExpenseViewModel(expense)));
             // Manually deselect item
             ExpensesListView.SelectedItem = null;
         }

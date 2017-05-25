@@ -9,36 +9,24 @@ namespace ReckonMe
 {
     public partial class App : Application
     {
-        public App()
+        private readonly IAccountService _accountService;
+
+        public App() : this(DependencyService.Get<IAccountService>())
+        { }
+
+        public App(IAccountService accountService)
         {
+            _accountService = accountService;
             InitializeComponent();
 
             SetMainPage();
         }
 
-        public static void SetMainPage()
+        public void SetMainPage()
         {
-            if (DependencyService.Get<IAccountService>().IsUserLoggedIn())
-            {
-                Current.MainPage = new TabbedPage
-                {
-                    Children =
-                    {
-                        new NavigationPage(new WalletsPage())
-                        {
-                            Title = "Wallets"
-                        },
-                        new NavigationPage(new AboutPage())
-                        {
-                            Title = "About"
-                        }
-                    }
-                };
-            }
-            else
-            {
-                Current.MainPage = new NavigationPage(new LoginPage());
-            }
+            Current.MainPage = _accountService.IsUserLoggedIn() 
+                ? new NavigationPage(new WalletsPage()) 
+                : new NavigationPage(new LoginPage());
         }
     }
 }

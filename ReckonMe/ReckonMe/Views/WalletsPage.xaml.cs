@@ -9,28 +9,28 @@ namespace ReckonMe.Views
 {
     public partial class WalletsPage : ContentPage
     {
-        WalletsViewModel viewModel;
+        private readonly WalletsViewModel _viewModel;
 
         public WalletsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new WalletsViewModel();
+            BindingContext = _viewModel = new WalletsViewModel();
         }
 
-        async void OnWalletSelected(object sender, SelectedItemChangedEventArgs args)
+        private async void OnWalletSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var wallet = args.SelectedItem as Wallet;
             if (wallet == null)
                 return;
 
-            await Navigation.PushAsync(new WalletDetailPage(new WalletDetailViewModel(wallet)));
+            await Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel(wallet)));
 
             // Manually deselect item
             WalletsListView.SelectedItem = null;
         }
 
-        async void AddWallet_Clicked(object sender, EventArgs e)
+        private async void AddWallet_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewWalletPage());
         }
@@ -39,8 +39,8 @@ namespace ReckonMe.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Wallets.Count == 0)
-                viewModel.LoadWalletsCommand.Execute(null);
+            if (_viewModel.Wallets.Count == 0)
+                _viewModel.LoadWalletsCommand.Execute(null);
         }
     }
 }
