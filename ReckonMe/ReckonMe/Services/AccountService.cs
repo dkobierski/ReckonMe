@@ -74,6 +74,11 @@ namespace ReckonMe.Services
 
                     return AccountLoginResult.Authenticated;
                 }
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return AccountLoginResult.RequestException;
+                }
             }
             catch (HttpRequestException)
             {

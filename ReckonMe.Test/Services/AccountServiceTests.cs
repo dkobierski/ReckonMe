@@ -48,7 +48,7 @@ namespace ReckonMe.Test.Services
             [Test]
             public async Task Authenticated_when_api_response_is_ok()
             {
-                MockResponseStatusCodeForApiClient(HttpStatusCode.OK);
+                MockResponseStatusCodeForApiClient(HttpStatusCode.OK, "token");
 
                 var result = await _accountService.LoginUserAsync(new AccountLoginData());
 
