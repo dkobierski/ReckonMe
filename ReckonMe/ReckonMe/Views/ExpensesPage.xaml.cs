@@ -36,7 +36,7 @@ namespace ReckonMe.Views
 
         private async void AddExpense_Clicked(object sender, System.EventArgs e)
         {
-            await DisplayAlert("Not implemented", ":)", "cancel");
+            await Navigation.PushAsync(new NewExpensePage());
         }
 
         protected override void OnAppearing()

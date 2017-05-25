@@ -1,5 +1,6 @@
 ﻿using ReckonMe.Helpers;
 using ReckonMe.Models;
+using ReckonMe.Views;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -19,6 +20,13 @@ namespace ReckonMe.ViewModels
             Wallet = wallet;
             Expenses = new ObservableRangeCollection<Expense>();
             LoadExpensesCommand = new Command(async () => await ExecuteLoadItemsCommand());
+
+            MessagingCenter.Subscribe<NewExpensePage, Expense>(this, "AddItem", async (obj, item) =>
+            {
+                var expense = item as Expense;
+                Expenses.Add(expense);
+                await ExpenseDataStore.AddItemAsync(expense);
+            });
         }
 
         int _quantity = 1;

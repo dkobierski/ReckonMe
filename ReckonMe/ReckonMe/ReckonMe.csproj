@@ -69,6 +69,9 @@
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewExpensePage.xaml.cs">
+      <DependentUpon>NewExpensePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SingUpPage.xaml.cs">
       <DependentUpon>SingUpPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\ExpenseDetailedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NewExpensePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
