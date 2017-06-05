@@ -1,7 +1,7 @@
 ﻿using System;
 
 using ReckonMe.Models;
-
+using ReckonMe.Models.Wallet;
 using Xamarin.Forms;
 
 namespace ReckonMe.Views

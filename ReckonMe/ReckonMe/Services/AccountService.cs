@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ReckonMe.Helpers;
+using ReckonMe.Models;
 using ReckonMe.Models.Account;
 using Xamarin.Forms;
 
@@ -15,15 +16,17 @@ namespace ReckonMe.Services
     {
         private readonly IRequstExecutor _api;
         private readonly IDecodeToken _tokenDecoder;
+        private readonly IAppStateHolder _appState;
 
-        public AccountService() : this(DependencyService.Get<IRequstExecutor>(), new TokenDecoder())
+        public AccountService() : this(DependencyService.Get<IRequstExecutor>(), new TokenDecoder(), DependencyService.Get<IAppStateHolder>())
         {
         }
 
-        public AccountService(IRequstExecutor api, IDecodeToken tokenDecoder)
+        public AccountService(IRequstExecutor api, IDecodeToken tokenDecoder, IAppStateHolder appState)
         {
             _api = api;
             _tokenDecoder = tokenDecoder;
+            _appState = appState;
         }
 
         public async Task<AccountRegisterResult> SignUpUserAsync(AccountRegisterData user)
@@ -71,6 +74,11 @@ namespace ReckonMe.Services
                     var token = await _tokenDecoder.Decode(response);
                     
                     _api.SetAuthToken(token.AccessToken);
+
+                    _appState.SetUser(new ApplicationUser
+                    {
+                        Username = user.Username
+                    });
 
                     return AccountLoginResult.Authenticated;
                 }

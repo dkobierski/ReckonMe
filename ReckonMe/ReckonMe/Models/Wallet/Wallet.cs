@@ -1,4 +1,4 @@
-﻿namespace ReckonMe.Models
+﻿namespace ReckonMe.Models.Wallet
 {
     public class Wallet : BaseDataObject
     {

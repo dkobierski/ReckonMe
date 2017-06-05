@@ -42,7 +42,7 @@ namespace ReckonMe.Test.Services
 
             public Login()
             {
-                _accountService = new AccountService(RequstExecutor, TokenDecoder);
+                _accountService = new AccountService(RequstExecutor, TokenDecoder, new AppStateHolder());
             }
 
             [Test]
@@ -95,7 +95,7 @@ namespace ReckonMe.Test.Services
 
             public Register()
             {
-                _accountService = new AccountService(RequstExecutor, TokenDecoder);
+                _accountService = new AccountService(RequstExecutor, TokenDecoder, new AppStateHolder());
             }
 
             [Test]

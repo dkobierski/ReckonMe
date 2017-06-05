@@ -1,6 +1,7 @@
 ﻿using System;
 
 using ReckonMe.Models;
+using ReckonMe.Models.Wallet;
 using ReckonMe.ViewModels;
 
 using Xamarin.Forms;

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using ReckonMe.Helpers;
 using ReckonMe.Models;
+using ReckonMe.Models.Wallet;
 using ReckonMe.Views;
 
 using Xamarin.Forms;

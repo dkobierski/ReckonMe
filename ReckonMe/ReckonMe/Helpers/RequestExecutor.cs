@@ -10,7 +10,9 @@ namespace ReckonMe.Helpers
 {
     public interface IRequstExecutor
     {
+        Task<HttpResponseMessage> GetAsync(string relativeUrl);
         Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content);
+
         void SetAuthToken(string token);
     }
 
@@ -34,6 +36,11 @@ namespace ReckonMe.Helpers
             };
         }
 
+        public async Task<HttpResponseMessage> GetAsync(string relativeUrl)
+        {
+            return await _client.GetAsync(BuildUrl(relativeUrl));
+        }
+
         public void SetAuthToken(string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -41,7 +48,12 @@ namespace ReckonMe.Helpers
 
         public async Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content)
         {
-            return await _client.PostAsync($"{_client.BaseAddress}{relativeUrl}", content);
+            return await _client.PostAsync(BuildUrl(relativeUrl), content);
+        }
+
+        private string BuildUrl(string relativeUrl)
+        {
+            return $"{_client.BaseAddress}{relativeUrl}";
         }
     }
 }

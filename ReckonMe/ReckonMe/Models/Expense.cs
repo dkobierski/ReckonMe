@@ -15,5 +15,12 @@
             get => _description;
             set => SetProperty(ref _description, value);
         }
+
+        private decimal _cost;
+        public decimal Cost
+        {
+            get => _cost;
+            set => SetProperty(ref _cost, value);
+        }
     }
 }

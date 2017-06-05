@@ -2,21 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using ReckonMe.Models;
-
+using ReckonMe.Models.Wallet;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(ReckonMe.Services.MockWalletsDataStore))]
+[assembly: Dependency(typeof(ReckonMe.Services.WalletsDataStore))]
 namespace ReckonMe.Services
 {
-    public class MockWalletsDataStore : IDataStore<Wallet>
+    public class WalletsDataStore : IDataStore<Wallet>
     {
         private bool _isInitialized;
         private List<Wallet> _items;
 
+        private readonly IWalletService _service;
+
+        public WalletsDataStore() : this(DependencyService.Get<IWalletService>())
+        {
+        }
+
+        public WalletsDataStore(IWalletService service)
+        {
+            _service = service;
+        }
+
         public async Task<bool> AddItemAsync(Wallet item)
         {
+            await _service.AddWallet(new AddWalletData()
+            {
+                Description = item.Description,
+                Expenses = new List<Expense>(),
+                Members = new List<string>(),
+                Name = item.Text,
+                Owner = "dkobierski"
+            });
+
             await InitializeAsync();
 
             _items.Add(item);
@@ -72,23 +91,15 @@ namespace ReckonMe.Services
 
         public async Task InitializeAsync()
         {
-            if (_isInitialized)
-                return;
+//            if (_isInitialized)
+//                return;
 
             _items = new List<Wallet>();
 
-            var mockedItems = new List<Wallet>
-            {
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Portfel rodzinny", Description="Budżet rodzinny"},
-                new Wallet { Id = Guid.NewGuid().ToString(), Text = "Portfel mieszkaniowy", Description="Rozliczenia ze współlokatorami"},
-            };
+            _items.AddRange(await _service.GetWalletsForUserAsync());
+            
 
-            foreach (var item in mockedItems)
-            {
-                _items.Add(item);
-            }
-
-            _isInitialized = true;
+//            _isInitialized = true;
         }
     }
 }

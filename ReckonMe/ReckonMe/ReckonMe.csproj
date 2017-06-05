@@ -39,26 +39,32 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\AccountResponses.cs" />
+    <Compile Include="Helpers\AppStateHolder.cs" />
+    <Compile Include="Helpers\IAppStateHolder.cs" />
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
+    <Compile Include="Helpers\ResponseDecoder.cs" />
     <Compile Include="Models\Account\AccountLoginData.cs" />
     <Compile Include="Models\Account\AccountRegisterData.cs" />
+    <Compile Include="Models\Wallet\AddWalletData.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\BaseDataObject.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\Security\Token.cs" />
-    <Compile Include="Models\Wallet.cs" />
+    <Compile Include="Models\Wallet\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IDataStore.cs" />
+    <Compile Include="Services\IWalletService.cs" />
     <Compile Include="Services\MockMembersDataStore.cs" />
-    <Compile Include="Services\MockWalletsDataStore.cs" />
+    <Compile Include="Services\WalletsDataStore.cs" />
     <Compile Include="Services\MockExpensesDataStore.cs" />
     <Compile Include="Helpers\RequestExecutor.cs" />
     <Compile Include="Helpers\TokenDecoder.cs" />
+    <Compile Include="Services\WalletService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
     <Compile Include="ViewModels\ExpensesViewModel.cs" />
