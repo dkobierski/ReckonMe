@@ -6,12 +6,12 @@
         <ToolbarItem Text="Sign Up" Clicked="OnSignUpClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand">
+        <StackLayout VerticalOptions="CenterAndExpand">
             <Label Text="Username" />
             <Entry x:Name="UsernameEntry" Placeholder="username" Text="dkobierski" />
             <Label Text="Password" />
             <Entry x:Name="PasswordEntry" IsPassword="true" Text="test12345" />
-            <Button Text="Login" Clicked="OnLoginClicked" />
+            <Button Text="Login" Clicked="OnLoginClicked" Style="{StaticResource GreenButton}" />
             <Label x:Name="MessageLabel" />
         </StackLayout>
     </ContentPage.Content>

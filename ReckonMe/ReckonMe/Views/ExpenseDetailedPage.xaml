@@ -4,8 +4,31 @@
              x:Class="ReckonMe.Views.ExpenseDetailedPage"
              Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand">
-            <Button Text="Members" Clicked="OnMembersClicked" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="Edit" Grid.Row="0" Grid.Column="0" Style="{StaticResource BlueButton}" />
+            <Button Text="Delete" Grid.Row="0" Grid.Column="1" Style="{StaticResource RedButton}" />
+            <StackLayout VerticalOptions="StartAndExpand" Grid.Row="1" Grid.ColumnSpan="2">
+                <Label Text="Name:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Name}" FontSize="Small" />
+                <Label Text="Description:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Description}" FontSize="Small" />
+                <Label Text="Cost:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Cost}" FontSize="Small" />
+                <Label Text="Cost:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Payer}" FontSize="Small" />
+                <Label Text="Members:" FontSize="Medium" />
+                <Label Text="{Binding Members}" FontSize="Small" />
+                <Label Text="Cost for member:" FontSize="Medium" />
+                <Label Text="{Binding CostForMember}" FontSize="Small" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

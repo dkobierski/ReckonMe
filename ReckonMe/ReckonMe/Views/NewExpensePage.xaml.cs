@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ReckonMe.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +14,7 @@ namespace ReckonMe.Views
     public partial class NewExpensePage : ContentPage
     {
         public Expense Expense { get; set; }
+        public string Members { get; set; }
 
         public NewExpensePage()
         {
@@ -21,8 +22,10 @@ namespace ReckonMe.Views
 
             Expense = new Expense
             {
-                Text = "",
-                Description = ""
+                Name = "",
+                Description = "",
+                Cost = 0,
+                Payer = ""
             };
 
             BindingContext = this;
@@ -30,6 +33,9 @@ namespace ReckonMe.Views
 
         private async void Save_Clicked(object sender, EventArgs e)
         {
+            Expense.Members = Members?.Split(',').Select(m => m.Trim()).ToList();
+            if (Expense.Members == null)
+                return;
             MessagingCenter.Send(this, "AddItem", Expense);
             await Navigation.PopAsync();
         }

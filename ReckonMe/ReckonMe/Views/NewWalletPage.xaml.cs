@@ -16,7 +16,7 @@ namespace ReckonMe.Views
 
             Wallet = new Wallet
             {
-                Text = "",
+                Name = "",
                 Description = ""
             };
 

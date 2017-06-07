@@ -24,14 +24,14 @@ namespace ReckonMe.ViewModels
         /// <summary>
         /// Private backing field to hold the title
         /// </summary>
-        private string _title = string.Empty;
+        private string _name = string.Empty;
         /// <summary>
         /// Public property to set and get the title of the item
         /// </summary>
-        public string Title
+        public string Name
         {
-            get => _title;
-            set => SetProperty(ref _title, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
     }
 }

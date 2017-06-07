@@ -77,7 +77,7 @@ namespace ReckonMe.Services
 
             var mockedExpenses = new List<Expense>
             {
-                new Expense { Id = Guid.NewGuid().ToString(), Text = "Testowy wydatek", Description="Testowy opis", Cost = 15.25m},
+                new Expense { Id = Guid.NewGuid().ToString(), Name = "Testowy wydatek", Description="Testowy opis", Cost = 15.25m},
             };
 
             foreach (var item in mockedExpenses)

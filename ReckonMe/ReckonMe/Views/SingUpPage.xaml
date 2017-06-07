@@ -10,7 +10,7 @@
             <Entry x:Name="PasswordEntry" IsPassword="true" />
             <Label Text="Email address" />
             <Entry x:Name="EmailEntry" />
-            <Button Text="Sign Up" Clicked="OnSignUpClicked" />
+            <Button Text="Sign Up" Clicked="OnSignUpClicked" Style="{StaticResource GreenButton}" />
             <Label x:Name="MessageLabel" />
         </StackLayout>
     </ContentPage.Content>

@@ -9,11 +9,15 @@
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Expense name:" FontSize="Medium" />
-            <Entry Text="{Binding Expense.Text}" FontSize="Small" />
+            <Entry Text="{Binding Expense.Name}" FontSize="Small" />
             <Label Text="Description:" FontSize="Medium" />
             <Editor Text="{Binding Expense.Description}" FontSize="Small" Margin="0" />
             <Label Text="Cost:" FontSize="Medium" />
             <Editor Text="{Binding Expense.Cost}" FontSize="Small" Margin="0" />
+            <Label Text="Payer:" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Payer}" FontSize="Small" Margin="0" />
+            <Label Text="Members:" FontSize="Medium" />
+            <Editor Text="{Binding Members}" FontSize="Small" Margin="0" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,7 +7,7 @@
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="15">
 			<Label Text="Wallet name:" FontSize="Medium" />
-			<Entry Text="{Binding Wallet.Text}" FontSize="Small" />
+			<Entry Text="{Binding Wallet.Name}" FontSize="Small" />
 			<Label Text="Description:" FontSize="Medium" />
 			<Editor Text="{Binding Wallet.Description}" FontSize="Small" Margin="0" />
 		</StackLayout>

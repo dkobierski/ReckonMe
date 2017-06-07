@@ -2,12 +2,12 @@
 {
     public class Wallet : BaseDataObject
     {
-        private string _text = string.Empty;
+        private string _name = string.Empty;
 
-        public string Text
+        public string Name
         {
-            get => _text;
-            set => SetProperty(ref _text, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
         private string _description = string.Empty;

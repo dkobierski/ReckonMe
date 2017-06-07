@@ -12,7 +12,7 @@ namespace ReckonMe.Services
     public class WalletsDataStore : IDataStore<Wallet>
     {
         private bool _isInitialized;
-        private List<Wallet> _items;
+        private List<Wallet> _wallets;
 
         private readonly IWalletService _service;
 
@@ -32,50 +32,50 @@ namespace ReckonMe.Services
                 Description = item.Description,
                 Expenses = new List<Expense>(),
                 Members = new List<string>(),
-                Name = item.Text,
+                Name = item.Name,
                 Owner = "dkobierski"
             });
 
             await InitializeAsync();
 
-            _items.Add(item);
+            _wallets.Add(item);
 
-            return await Task.FromResult(true);
+            return true;
         }
 
         public async Task<bool> UpdateItemAsync(Wallet item)
         {
             await InitializeAsync();
 
-            var _item = _items.FirstOrDefault(arg => arg.Id == item.Id);
-            _items.Remove(_item);
-            _items.Add(item);
+            var _item = _wallets.FirstOrDefault(arg => arg.Id == item.Id);
+            _wallets.Remove(_item);
+            _wallets.Add(item);
 
-            return await Task.FromResult(true);
+            return true;
         }
 
         public async Task<bool> DeleteItemAsync(Wallet item)
         {
             await InitializeAsync();
 
-            var _item = _items.FirstOrDefault(arg => arg.Id == item.Id);
-            _items.Remove(_item);
+            var _item = _wallets.FirstOrDefault(arg => arg.Id == item.Id);
+            _wallets.Remove(_item);
 
-            return await Task.FromResult(true);
+            return true;
         }
 
         public async Task<Wallet> GetItemAsync(string id)
         {
             await InitializeAsync();
 
-            return await Task.FromResult(_items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(_wallets.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Wallet>> GetItemsAsync(bool forceRefresh = false)
         {
             await InitializeAsync();
 
-            return await Task.FromResult(_items);
+            return await Task.FromResult(_wallets);
         }
 
         public Task<bool> PullLatestAsync()
@@ -94,9 +94,9 @@ namespace ReckonMe.Services
 //            if (_isInitialized)
 //                return;
 
-            _items = new List<Wallet>();
+            _wallets = new List<Wallet>();
 
-            _items.AddRange(await _service.GetWalletsForUserAsync());
+            _wallets.AddRange(await _service.GetWalletsForUserAsync());
             
 
 //            _isInitialized = true;

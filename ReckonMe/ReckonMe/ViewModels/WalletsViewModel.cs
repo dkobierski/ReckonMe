@@ -18,7 +18,7 @@ namespace ReckonMe.ViewModels
 
         public WalletsViewModel()
         {
-            Title = "Wallets";          
+            Name = "Wallets";          
             Wallets = new ObservableRangeCollection<Wallet>();
             LoadWalletsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

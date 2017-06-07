@@ -23,10 +23,5 @@ namespace ReckonMe.Views
 
             BindingContext = _viewModel = viewModel;
         }
-
-        private async void OnMembersClicked(object sender, EventArgs e)
-        {
-             await DisplayAlert("Not implemented", ":)", "cancel");
-        }
     }
 }

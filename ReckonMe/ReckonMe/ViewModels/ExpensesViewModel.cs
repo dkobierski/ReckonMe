@@ -17,7 +17,7 @@ namespace ReckonMe.ViewModels
 
         public ExpensesViewModel(Wallet wallet = null)
         {
-            Title = wallet?.Text;
+            Name = wallet?.Name;
             Wallet = wallet;
             Expenses = new ObservableRangeCollection<Expense>();
             LoadExpensesCommand = new Command(async () => await ExecuteLoadItemsCommand());
