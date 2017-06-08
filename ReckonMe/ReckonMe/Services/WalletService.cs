@@ -68,9 +68,14 @@ namespace ReckonMe.Services
             throw new System.NotImplementedException();
         }
 
-        public Task RemoveWallet(string id)
+        public async Task RemoveWallet(string id)
         {
-            throw new System.NotImplementedException();
+            var response = await _api.DeleteAsync($"wallets/{id}")
+                .ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.NoContent)
+            {
+            }
         }
     }
 }

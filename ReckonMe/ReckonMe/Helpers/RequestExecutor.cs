@@ -12,6 +12,7 @@ namespace ReckonMe.Helpers
     {
         Task<HttpResponseMessage> GetAsync(string relativeUrl);
         Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content);
+        Task<HttpResponseMessage> DeleteAsync(string relativeUrl);
 
         void SetAuthToken(string token);
     }
@@ -49,6 +50,11 @@ namespace ReckonMe.Helpers
         public async Task<HttpResponseMessage> PostAsync(string relativeUrl, StringContent content)
         {
             return await _client.PostAsync(BuildUrl(relativeUrl), content);
+        }
+
+        public async Task<HttpResponseMessage> DeleteAsync(string relativeUrl)
+        {
+            return await _client.DeleteAsync(BuildUrl(relativeUrl));
         }
 
         private string BuildUrl(string relativeUrl)

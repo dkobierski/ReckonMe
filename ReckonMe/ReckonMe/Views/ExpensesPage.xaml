@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Text="Edit" Grid.Row="0" Grid.Column="0" Style="{StaticResource BlueButton}" />
-            <Button Text="Delete" Grid.Row="0" Grid.Column="1" Style="{StaticResource RedButton}" />
+            <Button Text="Delete" Grid.Row="0" Clicked="DeleteButton_Clicked" Grid.Column="1" Style="{StaticResource RedButton}" />
 
             <ListView x:Name="ExpensesListView"                  
                       ItemsSource="{Binding Expenses}"

@@ -59,6 +59,9 @@ namespace ReckonMe.Services
             await InitializeAsync();
 
             var _item = _wallets.FirstOrDefault(arg => arg.Id == item.Id);
+
+            await _service.RemoveWallet(_item.Id);
+
             _wallets.Remove(_item);
 
             return true;
