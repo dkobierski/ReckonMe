@@ -1,4 +1,6 @@
-﻿namespace ReckonMe.Models.Wallet
+﻿using System.Collections.Generic;
+
+namespace ReckonMe.Models.Wallet
 {
     public class Wallet : BaseDataObject
     {
@@ -17,5 +19,9 @@
             get => _description;
             set => SetProperty(ref _description, value);
         }
+
+        public string Owner { get; set; }
+        public List<string> Members { get; set; }
+        public List<Expense> Expenses { get; set; }
     }
 }

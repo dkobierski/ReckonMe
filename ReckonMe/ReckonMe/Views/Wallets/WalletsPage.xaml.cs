@@ -1,12 +1,9 @@
 ﻿using System;
-
-using ReckonMe.Models;
 using ReckonMe.Models.Wallet;
 using ReckonMe.ViewModels;
-
 using Xamarin.Forms;
 
-namespace ReckonMe.Views
+namespace ReckonMe.Views.Wallets
 {
     public partial class WalletsPage : ContentPage
     {
@@ -25,7 +22,8 @@ namespace ReckonMe.Views
             if (wallet == null)
                 return;
 
-            await Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel(wallet)));
+            
+            await Navigation.PushAsync(new Expenses.ExpensesPage(new ExpensesViewModel(wallet)));
 
             // Manually deselect item
             WalletsListView.SelectedItem = null;

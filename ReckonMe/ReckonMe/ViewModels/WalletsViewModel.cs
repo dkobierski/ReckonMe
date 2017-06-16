@@ -3,10 +3,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 
 using ReckonMe.Helpers;
-using ReckonMe.Models;
 using ReckonMe.Models.Wallet;
-using ReckonMe.Views;
-
+using ReckonMe.Views.Wallets;
 using Xamarin.Forms;
 
 namespace ReckonMe.ViewModels

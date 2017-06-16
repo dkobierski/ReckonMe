@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ReckonMe.Views.ExpenseDetailedPage"
+             x:Class="ReckonMe.Views.Expenses.ExpenseDetailedPage"
              Title="{Binding Title}">
     <ContentPage.Content>
         <Grid>
@@ -21,8 +21,8 @@
                 <Label Text="Description:" FontSize="Medium" />
                 <Label Text="{Binding Expense.Description}" FontSize="Small" />
                 <Label Text="Cost:" FontSize="Medium" />
-                <Label Text="{Binding Expense.Cost}" FontSize="Small" />
-                <Label Text="Cost:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Value}" FontSize="Small" />
+                <Label Text="Payer:" FontSize="Medium" />
                 <Label Text="{Binding Expense.Payer}" FontSize="Small" />
                 <Label Text="Members:" FontSize="Medium" />
                 <Label Text="{Binding Members}" FontSize="Small" />

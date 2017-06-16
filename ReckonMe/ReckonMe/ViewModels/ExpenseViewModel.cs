@@ -1,10 +1,7 @@
-﻿using ReckonMe.Helpers;
-using ReckonMe.Models;
-using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using ReckonMe.Models;
 using System.Text;
-using System.Threading.Tasks;
+using ReckonMe.Models.Wallet;
+using ReckonMe.Views;
 using Xamarin.Forms;
 
 namespace ReckonMe.ViewModels
@@ -32,7 +29,7 @@ namespace ReckonMe.ViewModels
             {
                 return "0";
             }
-            var dividedCost = Expense.Cost / membersCount;
+            var dividedCost = Expense.Value / membersCount;
             return dividedCost.ToString("#.##");
         }
 

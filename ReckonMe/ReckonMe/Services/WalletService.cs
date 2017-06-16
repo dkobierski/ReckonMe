@@ -63,9 +63,19 @@ namespace ReckonMe.Services
             
         }
 
-        public Task UpdateWallet(string id, EditWalletData wallet)
+        public async Task UpdateWallet(string id, EditWalletData wallet)
         {
-            throw new System.NotImplementedException();
+            var content = new StringContent(
+                JsonConvert.SerializeObject(wallet),
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await _api.PutAsync($"wallets/{id}", content)
+                .ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+            }
         }
 
         public async Task RemoveWallet(string id)

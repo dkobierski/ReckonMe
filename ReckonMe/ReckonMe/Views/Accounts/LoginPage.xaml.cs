@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Linq;
 using ReckonMe.Constants;
-using ReckonMe.Models;
 using ReckonMe.Models.Account;
 using ReckonMe.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ReckonMe.Views
+namespace ReckonMe.Views.Accounts
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
@@ -43,7 +41,7 @@ namespace ReckonMe.Views
             switch (result)
             {
                 case AccountLoginResult.Authenticated:
-                    Navigation.InsertPageBefore(new WalletsPage(), this);
+                    Navigation.InsertPageBefore(new Wallets.WalletsPage(), this);
                     await Navigation.PopAsync();
                     break;
                 case AccountLoginResult.InvalidCredentials:

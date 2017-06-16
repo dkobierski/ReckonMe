@@ -3,6 +3,8 @@ using ReckonMe.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using LoginPage = ReckonMe.Views.Accounts.LoginPage;
+using WalletsPage = ReckonMe.Views.Wallets.WalletsPage;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ReckonMe

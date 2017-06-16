@@ -1,11 +1,7 @@
-﻿
-using System;
-using ReckonMe.Models;
-using ReckonMe.ViewModels;
-
+﻿using ReckonMe.ViewModels;
 using Xamarin.Forms;
 
-namespace ReckonMe.Views
+namespace ReckonMe.Views.Expenses
 {
     public partial class ExpenseDetailedPage : ContentPage
     {

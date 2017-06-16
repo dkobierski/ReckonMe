@@ -1,11 +1,10 @@
-﻿
+﻿using System;
+using System.Diagnostics;
 using ReckonMe.Models;
 using ReckonMe.ViewModels;
-using System;
-using System.Diagnostics;
 using Xamarin.Forms;
 
-namespace ReckonMe.Views
+namespace ReckonMe.Views.Expenses
 {
     public partial class ExpensesPage : ContentPage
     {
@@ -43,10 +42,11 @@ namespace ReckonMe.Views
         // Not working
         private async void DeleteButton_Clicked(object sender, System.EventArgs e)
         {
-            await Navigation.PopToRootAsync();
+            await Navigation.PopAsync(true);
             try
             {
                 await _viewModel.DataStore.DeleteItemAsync(_viewModel.Wallet);
+                //await Navigation.PushAsync(new WalletsPage());
             }
             catch(Exception ex)
             {
@@ -61,6 +61,21 @@ namespace ReckonMe.Views
 
             if (_viewModel.Expenses.Count == 0)
                 _viewModel.LoadExpensesCommand.Execute(null);
+        }
+
+        private void EditButton_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDelete(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnMore(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

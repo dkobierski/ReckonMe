@@ -1,10 +1,8 @@
 ﻿using System;
-
-using ReckonMe.Models;
 using ReckonMe.Models.Wallet;
 using Xamarin.Forms;
 
-namespace ReckonMe.Views
+namespace ReckonMe.Views.Wallets
 {
     public partial class NewWalletPage : ContentPage
     {

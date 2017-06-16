@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(ReckonMe.Services.MockExpensesDataStore))]
+[assembly: Dependency(typeof(ReckonMe.Services.MockMembersDataStore))]
 namespace ReckonMe.Services
 {
     class MockMembersDataStore : IDataStore<Member>

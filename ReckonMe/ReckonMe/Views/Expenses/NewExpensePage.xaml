@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ReckonMe.Views.NewExpensePage"
+             x:Class="ReckonMe.Views.Expenses.NewExpensePage"
              Title="New Expense">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
@@ -13,7 +13,7 @@
             <Label Text="Description:" FontSize="Medium" />
             <Editor Text="{Binding Expense.Description}" FontSize="Small" Margin="0" />
             <Label Text="Cost:" FontSize="Medium" />
-            <Editor Text="{Binding Expense.Cost}" FontSize="Small" Margin="0" />
+            <Editor Text="{Binding Expense.Value}" FontSize="Small" Margin="0" Keyboard="Numeric"/>
             <Label Text="Payer:" FontSize="Medium" />
             <Editor Text="{Binding Expense.Payer}" FontSize="Small" Margin="0" />
             <Label Text="Members:" FontSize="Medium" />

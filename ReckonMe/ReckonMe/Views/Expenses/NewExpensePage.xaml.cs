@@ -1,14 +1,10 @@
-﻿using ReckonMe.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ReckonMe.ViewModels;
+using ReckonMe.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ReckonMe.Views
+namespace ReckonMe.Views.Expenses
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewExpensePage : ContentPage
@@ -24,7 +20,7 @@ namespace ReckonMe.Views
             {
                 Name = "",
                 Description = "",
-                Cost = 0,
+                Value = 0,
                 Payer = ""
             };
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ReckonMe.Views.ExpensesPage"
+             x:Class="ReckonMe.Views.Expenses.ExpensesPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add expense" Clicked="AddExpense_Clicked" />
@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Text="Edit" Grid.Row="0" Grid.Column="0" Style="{StaticResource BlueButton}" />
+            <Button Text="Edit" Grid.Row="0" Clicked="EditButton_Clicked" Grid.Column="0" Style="{StaticResource BlueButton}" />
             <Button Text="Delete" Grid.Row="0" Clicked="DeleteButton_Clicked" Grid.Column="1" Style="{StaticResource RedButton}" />
 
             <ListView x:Name="ExpensesListView"                  
@@ -38,7 +38,15 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10">
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
+                                          Text="More" />
+                                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                          Text="Delete" IsDestructive="True" />
+                            </ViewCell.ContextActions>
+
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <StackLayout Orientation="Vertical">
                                 <Label Text="{Binding Name}" 
                                        FontSize="16"
                                        Style="{DynamicResource ListItemTextStyle}"
@@ -47,6 +55,11 @@
                                        FontSize="13"
                                        Style="{DynamicResource ListItemDetailTextStyle}"
                                        LineBreakMode="NoWrap"/>
+                                <Label Text="{Binding Value}"
+                                       FontSize="13"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       LineBreakMode="NoWrap"/>
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

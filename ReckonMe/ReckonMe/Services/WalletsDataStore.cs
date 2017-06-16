@@ -11,7 +11,6 @@ namespace ReckonMe.Services
 {
     public class WalletsDataStore : IDataStore<Wallet>
     {
-        private bool _isInitialized;
         private List<Wallet> _wallets;
 
         private readonly IWalletService _service;
@@ -36,8 +35,6 @@ namespace ReckonMe.Services
                 Owner = "dkobierski"
             });
 
-            await InitializeAsync();
-
             _wallets.Add(item);
 
             return true;
@@ -46,24 +43,29 @@ namespace ReckonMe.Services
         public async Task<bool> UpdateItemAsync(Wallet item)
         {
             await InitializeAsync();
+            
+            var index = _wallets.FindIndex(arg => arg.Id == item.Id);
 
-            var _item = _wallets.FirstOrDefault(arg => arg.Id == item.Id);
-            _wallets.Remove(_item);
-            _wallets.Add(item);
+            await _service.UpdateWallet(item.Id, new EditWalletData
+            {
+                Name = item.Name,
+                Expenses = item.Expenses,
+                Description = item.Description,
+                Members = item.Members,
+                Owner = item.Owner
+            });
+
+            _wallets[index] = item;
 
             return true;
         }
 
         public async Task<bool> DeleteItemAsync(Wallet item)
         {
-            await InitializeAsync();
-
-            var _item = _wallets.FirstOrDefault(arg => arg.Id == item.Id);
-
-            await _service.RemoveWallet(_item.Id);
-
-            _wallets.Remove(_item);
-
+            await _service.RemoveWallet(item.Id);
+            
+            _wallets.RemoveAt(_wallets.FindIndex(arg => arg.Id == item.Id));
+            
             return true;
         }
 
@@ -94,15 +96,8 @@ namespace ReckonMe.Services
 
         public async Task InitializeAsync()
         {
-//            if (_isInitialized)
-//                return;
-
             _wallets = new List<Wallet>();
-
             _wallets.AddRange(await _service.GetWalletsForUserAsync());
-            
-
-//            _isInitialized = true;
         }
     }
 }
