@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ReckonMe.Models.Wallet
 {
@@ -23,5 +24,7 @@ namespace ReckonMe.Models.Wallet
         public string Owner { get; set; }
         public List<string> Members { get; set; }
         public List<Expense> Expenses { get; set; }
+
+        public decimal TotalSum => Expenses.Sum(s => s.Value);
     }
 }

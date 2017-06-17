@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using ReckonMe.Models.Wallet;
 using ReckonMe.ViewModels;
+using ReckonMe.Views.Expenses;
 using Xamarin.Forms;
 
 namespace ReckonMe.Views.Wallets
@@ -40,6 +42,41 @@ namespace ReckonMe.Views.Wallets
 
             if (_viewModel.Wallets.Count == 0)
                 _viewModel.LoadWalletsCommand.Execute(null);
+        }
+
+        private async void OnMore(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                var mi = ((MenuItem)sender);
+
+                Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel((Wallet)mi.CommandParameter)));
+
+                OnAppearing();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Exception", ex.Message, "OK");
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private async void OnDelete(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+            try
+            {
+                var mi = ((MenuItem)sender);
+
+                await _viewModel.DataStore.DeleteItemAsync((Wallet)mi.CommandParameter);
+                OnAppearing();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Exception", ex.Message, "OK");
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }
