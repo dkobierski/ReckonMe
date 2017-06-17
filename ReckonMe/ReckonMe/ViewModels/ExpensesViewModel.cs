@@ -25,11 +25,12 @@ namespace ReckonMe.ViewModels
             MessagingCenter.Subscribe<NewExpensePage, Expense>(this, "AddItem", async (obj, item) =>
             {
                 var expense = item as Expense;
-                Wallet.Expenses.Add(item);
 
                 Expenses.Add(expense);
 
                 await DataStore.UpdateItemAsync(Wallet);
+
+                await ExecuteLoadItemsCommand();
             });
         }
 

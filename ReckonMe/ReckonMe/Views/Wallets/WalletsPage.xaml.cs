@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using ReckonMe.Helpers;
 using ReckonMe.Models.Wallet;
 using ReckonMe.ViewModels;
 using ReckonMe.Views.Expenses;
@@ -44,39 +45,30 @@ namespace ReckonMe.Views.Wallets
                 _viewModel.LoadWalletsCommand.Execute(null);
         }
 
-        private async void OnMore(object sender, EventArgs e)
+        private void OnMore(object sender, EventArgs e)
         {
-            
-            try
+            this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
             {
                 var mi = ((MenuItem)sender);
 
-                Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel((Wallet)mi.CommandParameter)));
+                await Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel((Wallet)mi.CommandParameter)));
 
                 OnAppearing();
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Exception", ex.Message, "OK");
-                Debug.WriteLine(ex.Message);
-            }
+            });
         }
 
-        private async void OnDelete(object sender, EventArgs e)
+        private void OnDelete(object sender, EventArgs e)
         {
-            await Navigation.PopAsync(true);
-            try
+
+            this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
             {
-                var mi = ((MenuItem)sender);
+                await Navigation.PopAsync(true);
+                
+                var mi = (MenuItem)sender;
 
                 await _viewModel.DataStore.DeleteItemAsync((Wallet)mi.CommandParameter);
                 OnAppearing();
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Exception", ex.Message, "OK");
-                Debug.WriteLine(ex.Message);
-            }
+            });
         }
     }
 }

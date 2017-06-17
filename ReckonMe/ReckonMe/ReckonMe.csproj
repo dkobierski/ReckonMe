@@ -41,6 +41,7 @@
     <Compile Include="Constants\AccountResponses.cs" />
     <Compile Include="Constants\RowSizes.cs" />
     <Compile Include="Helpers\AppStateHolder.cs" />
+    <Compile Include="Helpers\ContentPageEXtensions.cs" />
     <Compile Include="Helpers\DecimalConverter.cs" />
     <Compile Include="Helpers\IAppStateHolder.cs" />
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
