@@ -3,24 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:statics="clr-namespace:ReckonMe.Constants;assembly=ReckonMe"
              x:Class="ReckonMe.Views.Expenses.ExpensesPage"
-             Title="{Binding Title}">
+             Title="{Binding Wallet.Name}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add expense" Clicked="AddExpense_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Text="Edit" Grid.Row="0" Clicked="EditButton_Clicked" Grid.Column="0" Style="{StaticResource BlueButton}" />
-            <Button Text="Delete" Grid.Row="0" Clicked="DeleteButton_Clicked" Grid.Column="1" Style="{StaticResource RedButton}" />
 
-            <ListView x:Name="ExpensesListView"                  
+
+        <ListView x:Name="ExpensesListView"                  
                       ItemsSource="{Binding Expenses}"
                       VerticalOptions="FillAndExpand"
                       HasUnevenRows="true"
@@ -28,29 +18,27 @@
                       IsPullToRefreshEnabled="true"
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       CachingStrategy="RecycleElement"
-				      ItemSelected="OnExpenseSelected"
-                      Grid.Row="1"
-                      Grid.ColumnSpan="2">
-                <ListView.Header>
-                    <StackLayout Padding="10" BackgroundColor="{StaticResource LightBackgroundColor}">
-                        <Label Text="Expenses" FontSize="Medium" HorizontalTextAlignment="Center"/>
-                    </StackLayout>
-                </ListView.Header>
-                <ListView.ItemTemplate>
-                    
-                    <DataTemplate>
-                        <ViewCell StyleId="disclosure">
-                            <ViewCell.ContextActions>
-                                <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
-                                          Text="More" />
-                                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                          Text="Delete" IsDestructive="True" />
-                            </ViewCell.ContextActions>
-                            
-                            <ContentView Padding="20,0">
-                                <RelativeLayout HeightRequest="{x:Static statics:RowSizes.LargeRowHeightDouble}">
+				      ItemSelected="OnExpenseSelected">
+            <ListView.Header>
+                <StackLayout Padding="10" BackgroundColor="{StaticResource LightBackgroundColor}">
+                    <Label Text="Expenses" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
 
-                                    <Label x:Name="PrimaryLabel" 
+                <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
+                                          Text="More" />
+                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                          Text="Delete" IsDestructive="True" />
+                        </ViewCell.ContextActions>
+
+                        <ContentView Padding="20,0">
+                            <RelativeLayout HeightRequest="{x:Static statics:RowSizes.LargeRowHeightDouble}">
+
+                                <Label x:Name="PrimaryLabel" 
                                            Text="{Binding Name}" 
                                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" 
                                            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
@@ -60,7 +48,7 @@
                                            YAlign="End" 
                                            LineBreakMode="TailTruncation" />
 
-                                    <Label x:Name="SecondaryLabel" 
+                                <Label x:Name="SecondaryLabel" 
                                            Text="{Binding Payer}" 
                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
                                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}" 
@@ -71,7 +59,7 @@
                                            YAlign="Start" 
                                            LineBreakMode="TailTruncation" />
 
-                                    <Label x:Name="TernaryLabel" 
+                                <Label x:Name="TernaryLabel" 
                                            Text="{Binding Value}" 
                                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=SecondaryLabel, Property=Width}" 
                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
@@ -83,13 +71,11 @@
                                            XAlign="End" 
                                            YAlign="Start" />
 
-                                </RelativeLayout>
-                            </ContentView>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+                            </RelativeLayout>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
-
 </ContentPage>
