@@ -26,7 +26,7 @@ namespace ReckonMe.Views.Wallets
                 return;
 
             
-            await Navigation.PushAsync(new Expenses.ExpensesPage(new ExpensesViewModel(wallet)));
+            await Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel(wallet)));
 
             // Manually deselect item
             WalletsListView.SelectedItem = null;

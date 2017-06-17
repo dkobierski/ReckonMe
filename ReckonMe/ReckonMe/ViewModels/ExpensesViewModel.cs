@@ -26,11 +26,10 @@ namespace ReckonMe.ViewModels
             {
                 var expense = item as Expense;
 
-                Expenses.Add(expense);
+                Wallet.Expenses.Add(expense);
+                Expenses.ReplaceRange(Wallet.Expenses);
 
                 await DataStore.UpdateItemAsync(Wallet);
-
-                await ExecuteLoadItemsCommand();
             });
         }
 

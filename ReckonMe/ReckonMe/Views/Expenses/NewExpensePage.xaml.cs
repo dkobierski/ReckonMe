@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ReckonMe.Helpers;
 using ReckonMe.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -27,13 +28,16 @@ namespace ReckonMe.Views.Expenses
             BindingContext = this;
         }
 
-        private async void Save_Clicked(object sender, EventArgs e)
+        private void Save_Clicked(object sender, EventArgs e)
         {
-            Expense.Members = Members?.Split(',').Select(m => m.Trim()).ToList();
-            if (Expense.Members == null)
-                return;
-            MessagingCenter.Send(this, "AddItem", Expense);
-            await Navigation.PopAsync();
+            this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
+            {
+                Expense.Members = Members?.Split(',').Select(m => m.Trim()).ToList();
+                if (Expense.Members == null)
+                    return;
+                MessagingCenter.Send(this, "AddItem", Expense);
+                await Navigation.PopAsync(true);
+            });
         }
     }
 }
