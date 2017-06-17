@@ -48,12 +48,12 @@ namespace ReckonMe.Views.Expenses
                 await _viewModel.DataStore.DeleteItemAsync(_viewModel.Wallet);
                 //await Navigation.PushAsync(new WalletsPage());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               await DisplayAlert("Exception", ex.Message, "OK");
+                await DisplayAlert("Exception", ex.Message, "OK");
                 Debug.WriteLine(ex.Message);
             }
-            
+
         }
         protected override void OnAppearing()
         {
@@ -68,14 +68,34 @@ namespace ReckonMe.Views.Expenses
             throw new NotImplementedException();
         }
 
-        private void OnDelete(object sender, EventArgs e)
+        private async void OnDelete(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var mi = ((MenuItem)sender);
+
+                _viewModel.Expenses.Remove((Expense)mi.CommandParameter);
+
+                await _viewModel.DataStore.UpdateItemAsync(_viewModel.Wallet);
+
+                OnAppearing();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Exception", ex.Message, "OK");
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         private void OnMore(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var mi = ((MenuItem)sender);
+
+            Navigation.PushAsync(
+                new ExpenseDetailedPage(
+                    new ExpenseViewModel((Expense)mi.CommandParameter)),
+                    true
+                    );
         }
     }
 }

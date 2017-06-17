@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants\AccountResponses.cs" />
+    <Compile Include="Constants\RowSizes.cs" />
     <Compile Include="Helpers\AppStateHolder.cs" />
     <Compile Include="Helpers\DecimalConverter.cs" />
     <Compile Include="Helpers\IAppStateHolder.cs" />

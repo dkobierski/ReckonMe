@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:statics="clr-namespace:ReckonMe.Constants;assembly=ReckonMe"
              x:Class="ReckonMe.Views.Expenses.ExpensesPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
@@ -36,35 +37,59 @@
                     </StackLayout>
                 </ListView.Header>
                 <ListView.ItemTemplate>
+                    
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell StyleId="disclosure">
                             <ViewCell.ContextActions>
                                 <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
                                           Text="More" />
                                 <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
                                           Text="Delete" IsDestructive="True" />
                             </ViewCell.ContextActions>
+                            
+                            <ContentView Padding="20,0">
+                                <RelativeLayout HeightRequest="{x:Static statics:RowSizes.LargeRowHeightDouble}">
 
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <StackLayout Orientation="Vertical">
-                                <Label Text="{Binding Name}" 
-                                       FontSize="16"
-                                       Style="{DynamicResource ListItemTextStyle}"
-                                       LineBreakMode="NoWrap"/>
-                                <Label Text="{Binding Description}"
-                                       FontSize="13"
-                                       Style="{DynamicResource ListItemDetailTextStyle}"
-                                       LineBreakMode="NoWrap"/>
-                                <Label Text="{Binding Value}"
-                                       FontSize="13"
-                                       Style="{DynamicResource ListItemDetailTextStyle}"
-                                       LineBreakMode="NoWrap"/>
-                                </StackLayout>
-                            </StackLayout>
+                                    <Label x:Name="PrimaryLabel" 
+                                           Text="{Binding Name}" 
+                                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" 
+                                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           
+                                           
+                                           XAlign="Start" 
+                                           YAlign="End" 
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Label x:Name="SecondaryLabel" 
+                                           Text="{Binding Payer}" 
+                                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}" 
+                                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           
+                                           
+                                           XAlign="Start" 
+                                           YAlign="Start" 
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Label x:Name="TernaryLabel" 
+                                           Text="{Binding Value}" 
+                                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=SecondaryLabel, Property=Width}" 
+                                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}" 
+                                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           
+                                           
+                                           FontSize="Small" 
+                                           XAlign="End" 
+                                           YAlign="Start" />
+
+                                </RelativeLayout>
+                            </ContentView>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </ContentPage.Content>
+
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using ReckonMe.ViewModels;
+﻿using System;
+using ReckonMe.ViewModels;
 using Xamarin.Forms;
 
 namespace ReckonMe.Views.Expenses
@@ -18,6 +19,16 @@ namespace ReckonMe.Views.Expenses
             InitializeComponent();
 
             BindingContext = _viewModel = viewModel;
+        }
+
+        private void OnDelete(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnEdit(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

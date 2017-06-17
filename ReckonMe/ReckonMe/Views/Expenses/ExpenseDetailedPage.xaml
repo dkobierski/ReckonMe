@@ -3,21 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ReckonMe.Views.Expenses.ExpenseDetailedPage"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Usuń" Clicked="OnDelete" />
+        <ToolbarItem Text="Edytuj" Clicked="OnEdit" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Text="Edit" Grid.Row="0" Grid.Column="0" Style="{StaticResource BlueButton}" />
-            <Button Text="Delete" Grid.Row="0" Grid.Column="1" Style="{StaticResource RedButton}" />
-            <StackLayout VerticalOptions="StartAndExpand" Grid.Row="1" Grid.ColumnSpan="2">
-                <Label Text="Name:" FontSize="Medium" />
-                <Label Text="{Binding Expense.Name}" FontSize="Small" />
+        
+            <StackLayout Padding="20" VerticalOptions="StartAndExpand">
+
+                <Label Text="{Binding Expense.Name}"  FontSize="48" HorizontalOptions="Center"/>
+
                 <Label Text="Description:" FontSize="Medium" />
                 <Label Text="{Binding Expense.Description}" FontSize="Small" />
                 <Label Text="Cost:" FontSize="Medium" />
@@ -28,7 +23,8 @@
                 <Label Text="{Binding Members}" FontSize="Small" />
                 <Label Text="Cost for member:" FontSize="Medium" />
                 <Label Text="{Binding CostForMember}" FontSize="Small" />
+
             </StackLayout>
-        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>
