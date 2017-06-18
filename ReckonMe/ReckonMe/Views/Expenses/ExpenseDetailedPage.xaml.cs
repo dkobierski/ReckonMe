@@ -1,4 +1,5 @@
 ﻿using System;
+using ReckonMe.Models;
 using ReckonMe.ViewModels;
 using Xamarin.Forms;
 
@@ -21,14 +22,15 @@ namespace ReckonMe.Views.Expenses
             BindingContext = _viewModel = viewModel;
         }
 
-        private void OnDelete(object sender, EventArgs e)
+        private async void OnDelete(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MessagingCenter.Send(this, "DeleteItem", _viewModel.Expense.Id);
+            await Navigation.PopAsync(true);
         }
 
         private void OnEdit(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Navigation.PushAsync(new EditExpensePage(_viewModel.Expense));
         }
     }
 }

@@ -59,10 +59,7 @@ namespace ReckonMe.Views.Expenses
             {
                 var mi = ((MenuItem)sender);
 
-                _viewModel.Wallet.Expenses.Remove((Expense)mi.CommandParameter);
-
-                await _viewModel.DataStore.UpdateItemAsync(_viewModel.Wallet);
-                _viewModel.LoadExpensesCommand.Execute(null);
+                MessagingCenter.Send(this, "DeleteItem", ((Expense)mi.CommandParameter).Id);
 
                 OnAppearing();
             }
@@ -82,6 +79,13 @@ namespace ReckonMe.Views.Expenses
                     new ExpenseViewModel((Expense)mi.CommandParameter)),
                     true
                     );
+        }
+
+        private void OnEdit(object sender, EventArgs e)
+        {
+            var mi = (MenuItem) sender;
+
+            Navigation.PushAsync(new EditExpensePage((Expense) mi.CommandParameter));
         }
     }
 }

@@ -31,14 +31,35 @@ namespace ReckonMe.ViewModels
 
                 await DataStore.UpdateItemAsync(Wallet);
             });
+
+            MessagingCenter.Subscribe<EditExpensePage, Expense>(this, "EditItem", async (page, expense) =>
+            {
+                var index = Wallet.Expenses.FindIndex(e => e.Id == expense.Id);
+                if (index != -1)
+                {
+                    Wallet.Expenses[index] = expense;
+                }
+                
+                await DataStore.UpdateItemAsync(Wallet);
+            });
+
+            MessagingCenter.Subscribe<ExpenseDetailedPage, string>(this, "DeleteItem", async (page, expenseId) =>
+            {
+                await DeleteExpense(expenseId);
+            });
+
+            MessagingCenter.Subscribe<ExpensesPage, string>(this, "DeleteItem", async (page, expenseId) =>
+            {
+                await DeleteExpense(expenseId);
+            });
         }
 
-        int _quantity = 1;
-
-        public int Quantity
+        private async Task DeleteExpense(string expenseId)
         {
-            get => _quantity;
-            set => SetProperty(ref _quantity, value);
+            var expense = Wallet.Expenses.Find(e => e.Id == expenseId);
+            Wallet.Expenses.Remove(expense);
+            await DataStore.UpdateItemAsync(Wallet);
+            LoadExpensesCommand.Execute(null);
         }
 
         private async Task ExecuteLoadItemsCommand()

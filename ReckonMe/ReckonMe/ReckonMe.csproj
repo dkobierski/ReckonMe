@@ -77,6 +77,9 @@
     <Compile Include="Views\Accounts\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Expenses\EditExpensePage.xaml.cs">
+      <DependentUpon>EditExpensePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Expenses\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\Wallets\EditWalletPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Expenses\EditExpensePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
