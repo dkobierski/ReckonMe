@@ -67,6 +67,8 @@ namespace ReckonMe.Views.Wallets
                 var mi = (MenuItem)sender;
 
                 await _viewModel.DataStore.DeleteItemAsync((Wallet)mi.CommandParameter);
+                
+                _viewModel.LoadWalletsCommand.Execute(null);
                 OnAppearing();
             });
         }

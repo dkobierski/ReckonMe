@@ -39,22 +39,6 @@ namespace ReckonMe.Views.Expenses
             await Navigation.PushAsync(new NewExpensePage());
         }
 
-        // Not working
-        private async void DeleteButton_Clicked(object sender, System.EventArgs e)
-        {
-            await Navigation.PopAsync(true);
-            try
-            {
-                await _viewModel.DataStore.DeleteItemAsync(_viewModel.Wallet);
-                //await Navigation.PushAsync(new WalletsPage());
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Exception", ex.Message, "OK");
-                Debug.WriteLine(ex.Message);
-            }
-
-        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -62,21 +46,17 @@ namespace ReckonMe.Views.Expenses
             if (_viewModel.Expenses.Count == 0)
                 _viewModel.LoadExpensesCommand.Execute(null);
         }
-
-        private void EditButton_Clicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         private async void OnDelete(object sender, EventArgs e)
         {
             try
             {
                 var mi = ((MenuItem)sender);
 
-                _viewModel.Expenses.Remove((Expense)mi.CommandParameter);
+                _viewModel.Wallet.Expenses.Remove((Expense)mi.CommandParameter);
 
                 await _viewModel.DataStore.UpdateItemAsync(_viewModel.Wallet);
+                _viewModel.LoadExpensesCommand.Execute(null);
 
                 OnAppearing();
             }
