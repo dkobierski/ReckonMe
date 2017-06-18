@@ -57,7 +57,7 @@ namespace ReckonMe.Services
             var response = await _api.PostAsync("wallets/", content)
                 .ConfigureAwait(false); 
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.IsSuccessStatusCode)
             {
             }
             
@@ -73,7 +73,7 @@ namespace ReckonMe.Services
             var response = await _api.PutAsync($"wallets/{id}", content)
                 .ConfigureAwait(false);
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.IsSuccessStatusCode)
             {
             }
         }
@@ -83,7 +83,7 @@ namespace ReckonMe.Services
             var response = await _api.DeleteAsync($"wallets/{id}")
                 .ConfigureAwait(false);
 
-            if (response.StatusCode == HttpStatusCode.NoContent)
+            if (response.IsSuccessStatusCode)
             {
             }
         }

@@ -5,6 +5,7 @@
              x:Class="ReckonMe.Views.Expenses.ExpensesPage"
              Title="{Binding Wallet.Name}">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
         <ToolbarItem Text="Add expense" Clicked="AddExpense_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>

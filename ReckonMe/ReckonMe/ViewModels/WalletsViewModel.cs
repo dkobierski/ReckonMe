@@ -27,6 +27,12 @@ namespace ReckonMe.ViewModels
                 await DataStore.AddItemAsync(wallet);
                 await ExecuteLoadItemsCommand();
             });
+
+            MessagingCenter.Subscribe<EditWalletPage, Wallet>(this, "EditItem", async (page, wallet) =>
+            {
+                await DataStore.UpdateItemAsync(wallet);
+                await ExecuteLoadItemsCommand();
+            });
         }
 
         private async Task ExecuteLoadItemsCommand()

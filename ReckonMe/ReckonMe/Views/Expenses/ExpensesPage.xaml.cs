@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using ReckonMe.Models;
 using ReckonMe.ViewModels;
+using ReckonMe.Views.Wallets;
 using Xamarin.Forms;
 
 namespace ReckonMe.Views.Expenses
@@ -34,9 +35,14 @@ namespace ReckonMe.Views.Expenses
             ExpensesListView.SelectedItem = null;
         }
 
-        private async void AddExpense_Clicked(object sender, System.EventArgs e)
+        private async void AddExpense_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewExpensePage());
+        }
+
+        private async void Edit_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditWalletPage(_viewModel.Wallet));
         }
 
         protected override void OnAppearing()

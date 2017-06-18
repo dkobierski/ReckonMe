@@ -57,6 +57,16 @@ namespace ReckonMe.Views.Wallets
             });
         }
 
+        private void OnEdit(object sender, EventArgs e)
+        {
+            this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
+            {
+                var mi = (MenuItem)sender;
+
+                await Navigation.PushAsync(new EditWalletPage((Wallet)mi.CommandParameter));
+            });
+        }
+
         private void OnDelete(object sender, EventArgs e)
         {
 
