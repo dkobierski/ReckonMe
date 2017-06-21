@@ -6,7 +6,6 @@ namespace ReckonMe.Models.Wallet
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Owner { get; set; }
         public IEnumerable<string> Members { get; set; }
         public IEnumerable<Expense> Expenses { get; set; }
     }

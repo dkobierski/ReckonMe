@@ -20,10 +20,9 @@ namespace ReckonMe.ViewModels
             Wallets = new ObservableRangeCollection<Wallet>();
             LoadWalletsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewWalletPage, Wallet>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewWalletPage, Wallet>(this, "AddItem", async (page, wallet) =>
             {
-                var wallet = item as Wallet;
-//                Wallets.Add(wallet);
+                Wallets.Add(wallet);
                 await DataStore.AddItemAsync(wallet);
             });
 

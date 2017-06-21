@@ -28,7 +28,7 @@ namespace ReckonMe.Models.Wallet
         }
 
         public List<string> Members { get; set; }
-        public List<Expense> Expenses { get; set; }
+        public List<Expense> Expenses { get; set; } = new List<Expense>();
 
         public decimal TotalSum => Expenses.Sum(s => s.Value);
     }

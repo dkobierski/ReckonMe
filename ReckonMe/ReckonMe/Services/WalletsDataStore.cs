@@ -26,13 +26,12 @@ namespace ReckonMe.Services
 
         public async Task<bool> AddItemAsync(Wallet item)
         {
-            await _service.AddWallet(new AddWalletData()
+            await _service.AddWallet(new AddWalletData
             {
                 Description = item.Description,
                 Expenses = new List<Expense>(),
                 Members = new List<string>(),
-                Name = item.Name,
-                Owner = "dkobierski"
+                Name = item.Name
             });
 
             _wallets.Add(item);
@@ -45,6 +44,10 @@ namespace ReckonMe.Services
             await InitializeAsync();
             
             var index = _wallets.FindIndex(arg => arg.Id == item.Id);
+            if (index != -1)
+            {
+                _wallets[index] = item;
+            }
 
             await _service.UpdateWallet(item.Id, new EditWalletData
             {
@@ -54,8 +57,6 @@ namespace ReckonMe.Services
                 Members = item.Members,
                 Owner = item.Owner
             });
-
-            _wallets[index] = item;
 
             return true;
         }
@@ -73,14 +74,14 @@ namespace ReckonMe.Services
         {
             await InitializeAsync();
 
-            return await Task.FromResult(_wallets.FirstOrDefault(s => s.Id == id));
+            return _wallets.FirstOrDefault(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Wallet>> GetItemsAsync(bool forceRefresh = false)
         {
             await InitializeAsync();
 
-            return await Task.FromResult(_wallets);
+            return _wallets;
         }
 
         public Task<bool> PullLatestAsync()
