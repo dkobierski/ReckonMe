@@ -36,5 +36,7 @@ namespace ReckonMe.Models
 
         public DateTime Date { get; set; }
         public List<string> Members { get; set; }
+
+        public string WalletId { get; set; }
     }
 }

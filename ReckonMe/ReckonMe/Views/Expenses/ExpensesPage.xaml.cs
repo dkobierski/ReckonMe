@@ -37,7 +37,7 @@ namespace ReckonMe.Views.Expenses
 
         private async void AddExpense_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewExpensePage());
+            await Navigation.PushAsync(new NewExpensePage(_viewModel.Wallet));
         }
 
         private async void Edit_Clicked(object sender, EventArgs e)

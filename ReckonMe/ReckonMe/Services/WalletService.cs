@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -49,42 +50,63 @@ namespace ReckonMe.Services
 
         public async Task AddWallet(AddWalletData wallet)
         {
-            var content = new StringContent(
-                JsonConvert.SerializeObject(wallet),
-                Encoding.UTF8,
-                "application/json");
-
-            var response = await _api.PostAsync("wallets/", content)
-                .ConfigureAwait(false); 
-
-            if (response.IsSuccessStatusCode)
+            try
             {
+                var content = new StringContent(
+                    JsonConvert.SerializeObject(wallet),
+                    Encoding.UTF8,
+                    "application/json");
+
+                var response = await _api.PostAsync("wallets/", content)
+                    .ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                }
+
             }
-            
+            catch (Exception)
+            {
+
+            }
         }
 
         public async Task UpdateWallet(string id, EditWalletData wallet)
         {
-            var content = new StringContent(
-                JsonConvert.SerializeObject(wallet),
-                Encoding.UTF8,
-                "application/json");
-
-            var response = await _api.PutAsync($"wallets/{id}", content)
-                .ConfigureAwait(false);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
+                var content = new StringContent(
+                    JsonConvert.SerializeObject(wallet),
+                    Encoding.UTF8,
+                    "application/json");
+
+                var response = await _api.PutAsync($"wallets/{id}", content)
+                    .ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
 
         public async Task RemoveWallet(string id)
         {
-            var response = await _api.DeleteAsync($"wallets/{id}")
-                .ConfigureAwait(false);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
+                var response = await _api.DeleteAsync($"wallets/{id}")
+                    .ConfigureAwait(false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
     }
