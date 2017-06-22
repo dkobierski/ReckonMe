@@ -14,20 +14,38 @@ using Xamarin.Forms;
 
 namespace ReckonMe.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="ReckonMe.Services.IWalletService" />
     public class WalletService : IWalletService
     {
+        /// <summary>
+        /// The API
+        /// </summary>
         private readonly IRequstExecutor _api;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WalletService"/> class.
+        /// </summary>
         public WalletService() : this(DependencyService.Get<IRequstExecutor>())
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WalletService"/> class.
+        /// </summary>
+        /// <param name="api">The API.</param>
         public WalletService(IRequstExecutor api)
         {
             _api = api;
         }
 
 
+        /// <summary>
+        /// Gets the wallets for user asynchronous.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Wallet>> GetWalletsForUserAsync()
         {
             try
@@ -43,11 +61,22 @@ namespace ReckonMe.Services
             }
         }
 
+        /// <summary>
+        /// Gets the wallet asynchronous.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public Task<Wallet> GetWalletAsync(string id)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds the wallet.
+        /// </summary>
+        /// <param name="wallet">The wallet.</param>
+        /// <returns></returns>
         public async Task AddWallet(AddWalletData wallet)
         {
             try
@@ -71,6 +100,12 @@ namespace ReckonMe.Services
             }
         }
 
+        /// <summary>
+        /// Updates the wallet.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="wallet">The wallet.</param>
+        /// <returns></returns>
         public async Task UpdateWallet(string id, EditWalletData wallet)
         {
             try
@@ -93,6 +128,11 @@ namespace ReckonMe.Services
             }
         }
 
+        /// <summary>
+        /// Removes the wallet.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task RemoveWallet(string id)
         {
             try

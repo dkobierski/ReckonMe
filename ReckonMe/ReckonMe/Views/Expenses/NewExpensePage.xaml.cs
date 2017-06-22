@@ -8,14 +8,37 @@ using Xamarin.Forms.Xaml;
 
 namespace ReckonMe.Views.Expenses
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewExpensePage : ContentPage
     {
+        /// <summary>
+        /// The wallet
+        /// </summary>
         private readonly Wallet _wallet;
 
+        /// <summary>
+        /// Gets or sets the expense.
+        /// </summary>
+        /// <value>
+        /// The expense.
+        /// </value>
         public Expense Expense { get; set; }
+        /// <summary>
+        /// Gets or sets the members.
+        /// </summary>
+        /// <value>
+        /// The members.
+        /// </value>
         public string Members { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NewExpensePage"/> class.
+        /// </summary>
+        /// <param name="wallet">The wallet.</param>
         public NewExpensePage(Wallet wallet)
         {
             InitializeComponent();
@@ -33,6 +56,11 @@ namespace ReckonMe.Views.Expenses
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Save control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Save_Clicked(object sender, EventArgs e)
         {
             this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>

@@ -2,6 +2,9 @@
 
 namespace ReckonMe.Helpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MessagingCenterAlert
     {
         /// <summary>

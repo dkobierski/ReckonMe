@@ -12,16 +12,38 @@ using Xamarin.Forms;
 
 namespace ReckonMe.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="ReckonMe.Services.IAccountService" />
     public class AccountService : IAccountService
     {
+        /// <summary>
+        /// The API
+        /// </summary>
         private readonly IRequstExecutor _api;
+        /// <summary>
+        /// The token decoder
+        /// </summary>
         private readonly IDecodeToken _tokenDecoder;
+        /// <summary>
+        /// The application state
+        /// </summary>
         private readonly IAppStateHolder _appState;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountService"/> class.
+        /// </summary>
         public AccountService() : this(DependencyService.Get<IRequstExecutor>(), new TokenDecoder(), DependencyService.Get<IAppStateHolder>())
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountService"/> class.
+        /// </summary>
+        /// <param name="api">The API.</param>
+        /// <param name="tokenDecoder">The token decoder.</param>
+        /// <param name="appState">State of the application.</param>
         public AccountService(IRequstExecutor api, IDecodeToken tokenDecoder, IAppStateHolder appState)
         {
             _api = api;
@@ -29,6 +51,11 @@ namespace ReckonMe.Services
             _appState = appState;
         }
 
+        /// <summary>
+        /// Signs up user asynchronous.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public async Task<AccountRegisterResult> SignUpUserAsync(AccountRegisterData user)
         {
             try
@@ -57,6 +84,11 @@ namespace ReckonMe.Services
             }
         }
 
+        /// <summary>
+        /// Logins the user asynchronous.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public async Task<AccountLoginResult> LoginUserAsync(AccountLoginData user)
         {
             try
@@ -96,6 +128,12 @@ namespace ReckonMe.Services
             return AccountLoginResult.InvalidCredentials;
         }
 
+        /// <summary>
+        /// Determines whether [is user logged in].
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [is user logged in]; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsUserLoggedIn()
         {
             return false;

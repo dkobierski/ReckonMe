@@ -8,12 +8,32 @@ using Xamarin.Forms.Xaml;
 
 namespace ReckonMe.Views.Expenses
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditExpensePage : ContentPage
     {
+        /// <summary>
+        /// Gets or sets the expense.
+        /// </summary>
+        /// <value>
+        /// The expense.
+        /// </value>
         public Expense Expense { get; set; }
+        /// <summary>
+        /// Gets or sets the members.
+        /// </summary>
+        /// <value>
+        /// The members.
+        /// </value>
         public string Members { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditExpensePage"/> class.
+        /// </summary>
+        /// <param name="expense">The expense.</param>
         public EditExpensePage(Expense expense)
         {
             InitializeComponent();
@@ -24,6 +44,11 @@ namespace ReckonMe.Views.Expenses
             BindingContext = this;
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Save control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Save_Clicked(object sender, EventArgs e)
         {
             this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
@@ -36,6 +61,10 @@ namespace ReckonMe.Views.Expenses
             });
         }
 
+        /// <summary>
+        /// Concats the members.
+        /// </summary>
+        /// <returns></returns>
         private string ConcatMembers()
         {
             var members = Expense.Members;

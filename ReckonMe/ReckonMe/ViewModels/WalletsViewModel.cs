@@ -9,11 +9,30 @@ using Xamarin.Forms;
 
 namespace ReckonMe.ViewModels
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="ReckonMe.ViewModels.BaseViewModel" />
     public class WalletsViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Gets or sets the wallets.
+        /// </summary>
+        /// <value>
+        /// The wallets.
+        /// </value>
         public ObservableRangeCollection<Wallet> Wallets { get; set; }
+        /// <summary>
+        /// Gets or sets the load wallets command.
+        /// </summary>
+        /// <value>
+        /// The load wallets command.
+        /// </value>
         public Command LoadWalletsCommand { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WalletsViewModel"/> class.
+        /// </summary>
         public WalletsViewModel()
         {
             Name = "Wallets";          
@@ -32,6 +51,10 @@ namespace ReckonMe.ViewModels
             });
         }
 
+        /// <summary>
+        /// Executes the load items command.
+        /// </summary>
+        /// <returns></returns>
         private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)

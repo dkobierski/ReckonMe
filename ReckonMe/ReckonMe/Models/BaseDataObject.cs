@@ -3,6 +3,10 @@ using ReckonMe.Helpers;
 
 namespace ReckonMe.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="ReckonMe.Helpers.ObservableObject" />
     public class BaseDataObject : ObservableObject
     {
         /// <summary>

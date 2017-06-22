@@ -8,10 +8,20 @@ using Xamarin.Forms;
 
 namespace ReckonMe.Views.Wallets
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     public partial class WalletsPage : ContentPage
     {
+        /// <summary>
+        /// The view model
+        /// </summary>
         private readonly WalletsViewModel _viewModel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WalletsPage"/> class.
+        /// </summary>
         public WalletsPage()
         {
             InitializeComponent();
@@ -19,6 +29,11 @@ namespace ReckonMe.Views.Wallets
             BindingContext = _viewModel = new WalletsViewModel();
         }
 
+        /// <summary>
+        /// Called when [wallet selected].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="SelectedItemChangedEventArgs"/> instance containing the event data.</param>
         private async void OnWalletSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var wallet = args.SelectedItem as Wallet;
@@ -32,11 +47,22 @@ namespace ReckonMe.Views.Wallets
             WalletsListView.SelectedItem = null;
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the AddWallet control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void AddWallet_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewWalletPage());
         }
 
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -45,6 +71,11 @@ namespace ReckonMe.Views.Wallets
                 _viewModel.LoadWalletsCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Called when [more].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnMore(object sender, EventArgs e)
         {
             this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
@@ -57,6 +88,11 @@ namespace ReckonMe.Views.Wallets
             });
         }
 
+        /// <summary>
+        /// Called when [edit].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnEdit(object sender, EventArgs e)
         {
             this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
@@ -67,6 +103,11 @@ namespace ReckonMe.Views.Wallets
             });
         }
 
+        /// <summary>
+        /// Called when [delete].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnDelete(object sender, EventArgs e)
         {
 
