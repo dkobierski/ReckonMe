@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:statics="clr-namespace:ReckonMe.Constants;assembly=ReckonMe"
              x:Class="ReckonMe.Views.Wallets.WalletsPage"
-              Title="{Binding Title}"
+              Title="Lista portfeli"
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add wallet" Clicked="AddWallet_Clicked" />
+        <ToolbarItem Text="Dodaj portfel" Clicked="AddWallet_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
             <ListView x:Name="WalletsListView"
 				ItemsSource="{Binding Wallets}"
                 VerticalOptions="FillAndExpand"
@@ -19,16 +18,17 @@
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
 				ItemSelected="OnWalletSelected">
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell StyleId="disclosure">
                             <ViewCell.ContextActions>
                                 <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
-                                          Text="More" />
+                                          Text="Szczegóły" />
                                 <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
-                                          Text="Edit" />
+                                          Text="Edytuj" />
                                 <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                          Text="Delete" IsDestructive="True" />
+                                          Text="Usuń" IsDestructive="True" />
                             </ViewCell.ContextActions>
 
                             <ContentView Padding="20,0">
@@ -74,6 +74,5 @@
 
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

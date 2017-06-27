@@ -25,8 +25,17 @@ namespace ReckonMe.Views.Wallets
             if (wallet == null)
                 return;
 
-            
-            await Navigation.PushAsync(new ExpensesPage(new ExpensesViewModel(wallet)));
+            var expensesViewModel = new ExpensesViewModel(wallet);
+
+            await Navigation.PushAsync(new TabbedPage()
+            {
+                Children =
+                {
+                    new ExpensesPage(expensesViewModel),
+                    new ExpensesSummaryPage(expensesViewModel),
+                    new EditWalletPage(wallet)
+                }
+            });
 
             // Manually deselect item
             WalletsListView.SelectedItem = null;
@@ -73,11 +82,11 @@ namespace ReckonMe.Views.Wallets
             this.ShowErrorMessageIfUnhandledExceptionOccured(async () =>
             {
                 await Navigation.PopAsync(true);
-                
+
                 var mi = (MenuItem)sender;
 
                 await _viewModel.DataStore.DeleteItemAsync((Wallet)mi.CommandParameter);
-                
+
                 _viewModel.LoadWalletsCommand.Execute(null);
                 OnAppearing();
             });

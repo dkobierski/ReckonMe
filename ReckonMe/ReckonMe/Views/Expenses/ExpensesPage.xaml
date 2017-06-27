@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:statics="clr-namespace:ReckonMe.Constants;assembly=ReckonMe"
              x:Class="ReckonMe.Views.Expenses.ExpensesPage"
-             Title="{Binding Wallet.Name}">
+             Title="Wydatki">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
-        <ToolbarItem Text="Add expense" Clicked="AddExpense_Clicked" />
+        <ToolbarItem Text="Dodaj wydatek" Clicked="AddExpense_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
 
@@ -22,7 +21,7 @@
 				      ItemSelected="OnExpenseSelected">
             <ListView.Header>
                 <StackLayout Padding="10" BackgroundColor="{StaticResource LightBackgroundColor}">
-                    <Label Text="Expenses" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Wallet.Name}" FontSize="48" HorizontalTextAlignment="Center"/>
                 </StackLayout>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -31,11 +30,11 @@
                     <ViewCell StyleId="disclosure">
                         <ViewCell.ContextActions>
                             <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
-                                          Text="More" />
+                                          Text="Szczegóły" />
                             <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
-                                      Text="Edit" />
+                                      Text="Edytuj" />
                             <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                          Text="Delete" IsDestructive="True" />
+                                          Text="Usuń" IsDestructive="True" />
                         </ViewCell.ContextActions>
 
                         <ContentView Padding="20,0">

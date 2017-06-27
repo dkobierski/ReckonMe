@@ -80,6 +80,7 @@
     <Compile Include="Views\Expenses\EditExpensePage.xaml.cs">
       <DependentUpon>EditExpensePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Expenses\ExpensesSummaryPage.cs" />
     <Compile Include="Views\Expenses\NewExpensePage.xaml.cs">
       <DependentUpon>NewExpensePage.xaml</DependentUpon>
     </Compile>
