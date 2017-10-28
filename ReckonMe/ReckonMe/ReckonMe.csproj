@@ -38,29 +38,66 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Constants\AccountResponses.cs" />
+    <Compile Include="Constants\RowSizes.cs" />
+    <Compile Include="Helpers\AppStateHolder.cs" />
+    <Compile Include="Helpers\ContentPageEXtensions.cs" />
+    <Compile Include="Helpers\DecimalConverter.cs" />
+    <Compile Include="Helpers\IAppStateHolder.cs" />
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
+    <Compile Include="Helpers\ResponseDecoder.cs" />
+    <Compile Include="Models\Account\AccountLoginData.cs" />
+    <Compile Include="Models\Account\AccountRegisterData.cs" />
+    <Compile Include="Models\Wallet\AddWalletData.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\BaseDataObject.cs" />
-    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\Security\Token.cs" />
+    <Compile Include="Models\Wallet\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IDataStore.cs" />
-    <Compile Include="Services\MockDataStore.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="Services\IWalletService.cs" />
+    <Compile Include="Services\MockMembersDataStore.cs" />
+    <Compile Include="Services\WalletsDataStore.cs" />
+    <Compile Include="Helpers\RequestExecutor.cs" />
+    <Compile Include="Helpers\TokenDecoder.cs" />
+    <Compile Include="Services\WalletService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ItemDetailViewModel.cs" />
-    <Compile Include="ViewModels\ItemsViewModel.cs" />
-    <Compile Include="Views\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\ExpensesViewModel.cs" />
+    <Compile Include="ViewModels\WalletsViewModel.cs" />
+    <Compile Include="Views\Expenses\ExpenseDetailedPage.xaml.cs">
+      <DependentUpon>ExpenseDetailedPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemDetailPage.xaml.cs">
-      <DependentUpon>ItemDetailPage.xaml</DependentUpon>
+    <Compile Include="Views\Accounts\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ItemsPage.xaml.cs">
-      <DependentUpon>ItemsPage.xaml</DependentUpon>
+    <Compile Include="Views\Expenses\EditExpensePage.xaml.cs">
+      <DependentUpon>EditExpensePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewItemPage.xaml.cs">
-      <DependentUpon>NewItemPage.xaml</DependentUpon>
+    <Compile Include="Views\Expenses\ExpensesSummaryPage.cs" />
+    <Compile Include="Views\Expenses\NewExpensePage.xaml.cs">
+      <DependentUpon>NewExpensePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\SingUpPage.xaml.cs">
+      <DependentUpon>SingUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Expenses\ExpensesPage.xaml.cs">
+      <DependentUpon>ExpensesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wallets\EditWalletPage.xaml.cs">
+      <DependentUpon>EditWalletPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wallets\WalletsPage.xaml.cs">
+      <DependentUpon>WalletsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Wallets\NewWalletPage.xaml.cs">
+      <DependentUpon>NewWalletPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -68,24 +105,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AboutPage.xaml">
+    <EmbeddedResource Include="Views\Expenses\ExpensesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ItemDetailPage.xaml">
+    <EmbeddedResource Include="Views\Wallets\WalletsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ItemsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\NewItemPage.xaml">
+    <EmbeddedResource Include="Views\Wallets\NewWalletPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v7.AppCompat.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -98,6 +137,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Accounts\SingUpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Expenses\ExpenseDetailedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Expenses\NewExpensePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Wallets\EditWalletPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Expenses\EditExpensePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

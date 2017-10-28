@@ -1,0 +1,55 @@
+﻿using System;
+using System.Linq;
+using ReckonMe.Constants;
+using ReckonMe.Models.Account;
+using ReckonMe.Services;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace ReckonMe.Views.Accounts
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SingUpPage : ContentPage
+    {
+        private readonly IAccountService _accountService;
+
+        public SingUpPage() : this(DependencyService.Get<IAccountService>())
+        {
+
+        }
+
+        public SingUpPage(IAccountService accountService)
+        {
+            _accountService = accountService;
+            InitializeComponent();
+        }
+
+        private async void OnSignUpClicked(object sender, EventArgs e)
+        {
+            var user = new AccountRegisterData
+            {
+                Username = UsernameEntry.Text,
+                Password = PasswordEntry.Text,
+                Email = EmailEntry.Text
+            };
+
+            var result = await _accountService.SignUpUserAsync(user);
+
+            switch (result)
+            {
+                case AccountRegisterResult.AccountCreated:
+                    Navigation.InsertPageBefore(new LoginPage(), Navigation.NavigationStack.First());
+                    await Navigation.PopToRootAsync();
+                    break;
+                case AccountRegisterResult.AlreadyExist:
+                    MessageLabel.Text = AccountResponses.UserAlreadyExists;
+                    break;
+                case AccountRegisterResult.RequestException:
+                    MessageLabel.Text = AccountResponses.ConnectionProblem;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+}

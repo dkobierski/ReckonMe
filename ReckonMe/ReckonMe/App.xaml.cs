@@ -1,38 +1,34 @@
-﻿using ReckonMe.Views;
+﻿using ReckonMe.Services;
+using ReckonMe.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using LoginPage = ReckonMe.Views.Accounts.LoginPage;
+using WalletsPage = ReckonMe.Views.Wallets.WalletsPage;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ReckonMe
 {
     public partial class App : Application
     {
-        public App()
+        private readonly IAccountService _accountService;
+
+        public App() : this(DependencyService.Get<IAccountService>())
+        { }
+
+        public App(IAccountService accountService)
         {
+            _accountService = accountService;
             InitializeComponent();
 
             SetMainPage();
         }
 
-        public static void SetMainPage()
+        public void SetMainPage()
         {
-            Current.MainPage = new TabbedPage
-            {
-                Children =
-                {
-                    new NavigationPage(new ItemsPage())
-                    {
-                        Title = "Browse",
-                        Icon = Device.OnPlatform("tab_feed.png",null,null)
-                    },
-                    new NavigationPage(new AboutPage())
-                    {
-                        Title = "About",
-                        Icon = Device.OnPlatform("tab_about.png",null,null)
-                    },
-                }
-            };
+            Current.MainPage = _accountService.IsUserLoggedIn() 
+                ? new NavigationPage(new WalletsPage()) 
+                : new NavigationPage(new LoginPage());
         }
     }
 }

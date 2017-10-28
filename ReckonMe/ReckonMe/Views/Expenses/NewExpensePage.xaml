@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReckonMe.Views.Expenses.NewExpensePage"
+             Title="Dodaj wydatek">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Zapisz" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Nazwa wydatku:" FontSize="Medium" />
+            <Entry Text="{Binding Expense.Name}" FontSize="Small" />
+            <Label Text="Opis:" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Description}" FontSize="Small" Margin="0" />
+            <Label Text="Koszt:" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Value}" FontSize="Small" Margin="0" Keyboard="Numeric"/>
+            <Label Text="Płatnik:" FontSize="Medium" />
+            <Editor Text="{Binding Expense.Payer}" FontSize="Small" Margin="0" />
+            <Label Text="Uczestnicy:" FontSize="Medium" />
+            <Editor Text="{Binding Members}" FontSize="Small" Margin="0" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

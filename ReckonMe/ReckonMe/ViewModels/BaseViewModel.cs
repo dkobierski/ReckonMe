@@ -1,7 +1,7 @@
 ﻿using ReckonMe.Helpers;
 using ReckonMe.Models;
+using ReckonMe.Models.Wallet;
 using ReckonMe.Services;
-
 using Xamarin.Forms;
 
 namespace ReckonMe.ViewModels
@@ -11,25 +11,26 @@ namespace ReckonMe.ViewModels
         /// <summary>
         /// Get the azure service instance
         /// </summary>
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Wallet> DataStore => DependencyService.Get<IDataStore<Wallet>>();
+        public IDataStore<Member> MemberDataStore => DependencyService.Get<IDataStore<Member>>();
 
-        bool isBusy = false;
+        private bool _isBusy;
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
         /// <summary>
         /// Private backing field to hold the title
         /// </summary>
-        string title = string.Empty;
+        private string _name = string.Empty;
         /// <summary>
         /// Public property to set and get the title of the item
         /// </summary>
-        public string Title
+        public string Name
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReckonMe.Views.Expenses.ExpenseDetailedPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Usuń" Clicked="OnDelete" />
+        <ToolbarItem Text="Edytuj" Clicked="OnEdit" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        
+            <StackLayout Padding="20" VerticalOptions="StartAndExpand">
+
+                <Label Text="{Binding Expense.Name}"  FontSize="48" HorizontalOptions="Center"/>
+
+                <Label Text="Description:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Description}" FontSize="Small" />
+                <Label Text="Cost:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Value}" FontSize="Small" />
+                <Label Text="Payer:" FontSize="Medium" />
+                <Label Text="{Binding Expense.Payer}" FontSize="Small" />
+                <Label Text="Members:" FontSize="Medium" />
+                <Label Text="{Binding Members}" FontSize="Small" />
+                <Label Text="Cost for member:" FontSize="Medium" />
+                <Label Text="{Binding CostForMember}" FontSize="Small" />
+
+            </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

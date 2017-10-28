@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:statics="clr-namespace:ReckonMe.Constants;assembly=ReckonMe"
+             x:Class="ReckonMe.Views.Expenses.ExpensesPage"
+             Title="Wydatki">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Dodaj wydatek" Clicked="AddExpense_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+
+        <ListView x:Name="ExpensesListView"                  
+                      ItemsSource="{Binding Expenses}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      RefreshCommand="{Binding LoadExpensesCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+				      ItemSelected="OnExpenseSelected">
+            <ListView.Header>
+                <StackLayout Padding="10" BackgroundColor="{StaticResource LightBackgroundColor}">
+                    <Label Text="{Binding Wallet.Name}" FontSize="48" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+                    <ViewCell StyleId="disclosure">
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
+                                          Text="Szczegóły" />
+                            <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
+                                      Text="Edytuj" />
+                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                          Text="Usuń" IsDestructive="True" />
+                        </ViewCell.ContextActions>
+
+                        <ContentView Padding="20,0">
+                            <RelativeLayout HeightRequest="{x:Static statics:RowSizes.LargeRowHeightDouble}">
+
+                                <Label x:Name="PrimaryLabel" 
+                                           Text="{Binding Name}" 
+                                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" 
+                                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           
+                                           
+                                           XAlign="Start" 
+                                           YAlign="End" 
+                                           LineBreakMode="TailTruncation" />
+
+                                <Label x:Name="SecondaryLabel" 
+                                           Text="{Binding Payer}" 
+                                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}" 
+                                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           
+                                           
+                                           XAlign="Start" 
+                                           YAlign="Start" 
+                                           LineBreakMode="TailTruncation" />
+
+                                <Label x:Name="TernaryLabel" 
+                                           Text="{Binding Value}" 
+                                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=SecondaryLabel, Property=Width}" 
+                                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}" 
+                                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}" 
+                                           
+                                           
+                                           FontSize="Small" 
+                                           XAlign="End" 
+                                           YAlign="Start" />
+
+                            </RelativeLayout>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

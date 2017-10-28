@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 
 namespace ReckonMe.Droid
 {
@@ -14,9 +15,16 @@ namespace ReckonMe.Droid
 
             base.OnCreate(bundle);
 
+            AndroidEnvironment.UnhandledExceptionRaiser += HandleAndroidExceptions;
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+        }
+
+        private static void HandleAndroidExceptions(object sender, RaiseThrowableEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
